@@ -1,0 +1,63 @@
+.clearchimp { clear: both; margin: 0; padding: 0; display:inline-block; width: 90%; }
+.fluid-selector-wrapper {
+	clear: both;
+	margin: 0;
+	padding: 10px;
+	border: 0;
+}
+.fluid-column-left {
+	float: left;
+	width: 62%;
+	margin: 0 0 0 0;
+	padding: 10px 20px 10px 0;
+}
+.fluid-column-right {
+	margin: 0 0 0 62%;
+	padding: 10px;
+}
+.vvv_combobox {
+	width: 220px;
+}
+.vvv_combobox option {
+	background:#fbd0d3;
+}
+.vvv_textbox {
+	height: 100px;
+	width: 310px;
+}
+.floatingWrapper {
+	clear: both;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+.cookie-header-warning {
+	color: #f00;
+	font-weight: bold;
+}
+.leftPanel {
+	float: left;
+	margin: 0;
+	padding: 5px;
+	border: 0;
+	vertical-align: middle;
+}
+.rightPanel {
+	margin: 0 0 0 160px;
+	padding: 5px;
+	border: 0;
+	vertical-align: middle;
+}
+.option input, .option select, .option input[type="file"], .option textarea {
+	position: absolute;
+	left: 170;
+	top: 0;
+	width:120px;
+	padding:7px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border:1px solid #d5d5d5;
+	font-size:11px;
+	color:#656565;
+}

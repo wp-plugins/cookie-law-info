@@ -1,0 +1,38 @@
+.floatingWrapper {
+	clear: both;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.leftPanel {
+	float: left;
+	margin: 0;
+	padding: 5px;
+	border: 0;
+	vertical-align: middle;
+}
+
+.rightPanel {
+	margin: 0 0 0 160px;
+	padding: 5px;
+	border: 0;
+	vertical-align: middle;
+}
+
+
+.option input, .option select, .option input[type="file"], .option textarea {
+	position: absolute;
+	left: 170;
+	top: 0;
+	width:120px;
+	padding:7px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-image:url(../images/input_bg.png);
+	background-repeat:repeat-x;
+	border:1px solid #d5d5d5;
+	font-size:11px;
+	color:#656565;
+}

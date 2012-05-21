@@ -1,0 +1,46 @@
+#cookie-header {
+	clear: both;
+	margin: 0 auto;
+	padding: 0;
+	border: 0;
+	width: 100%;
+	font-size: 10pt;
+}
+.left-panel {
+	margin: 0;
+	padding: 5px 20px;
+	float: left;
+}
+.right-panel {
+	margin: 0;
+	margin-left: 90%;
+	padding: 0;
+}
+.cookie-link-button {
+	line-height: 16px;
+	margin: 4px 4px 4px 40px;
+	padding: 4px 8px 4px 8px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+}
+.cookie-link-button a, .cookie-link-button a:visited, .cookie-link-button a:hover {
+	text-decoration: none;
+}
+.cookie-link-text {
+	font-size: 12pt;
+	margin: 4px 4px 4px 40px;
+}
+#adipose-tab {
+	margin: 0 0 0 90%;
+	width: 42px;
+	height: 42px;
+	position: absolute;
+	z-index: 999;
+}
+#adipose-tab a, #adipose-tab a:visited, #adipose-tab a:active {
+	color: #000;
+}
+.icon {
+	padding: 4px 3px 1px 5px;
+}
