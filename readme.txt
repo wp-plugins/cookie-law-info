@@ -8,12 +8,14 @@ Stable tag: 1.8.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A simple way to ensure your website complies with the EU Cookie Law, which comes into force from 26 May 2012.
+A simple way to show how your website complies with the EU Cookie Law, which came into force on 26 May 2012.
 
 == Description ==
 
 This plugin adds a subtle, non-disruptive banner to your website header to highlight your compliance status regarding the new EU Cookie Law.
-Inline with current industry best practice (May 2012) and unlike some other plugins, this is non-disruptive i.e. it doesn't make your visitors take action before they use your website. This is aimed at reducing website visitor dropout.
+
+Note that it is not currently technically possible to completely block all cookies on your WordPress website without first updating all plugins that use cookies in some way. That is beyond the scope of any single plugin. This plugin can be used to highlight your compliance status and use of cookies.
+
 
 Features:
 
@@ -24,10 +26,16 @@ Features:
 
 Coming soon:
 
+* Visitors can edit cookie settings
+* An option to block Google Analytics cookies (should you wish to)
+* Option to block WordPress comment cookies
+* Able to switch off dropdown tab (once the header is dismissed it will no longer be shown)
 * Shortcode to construct a nicely-styled 'Privacy & Cookie Policy'
 * Language translations
 * New fonts, styles and animations
 * Option to show in footer
+
+If you have a feature request please get in touch, I'll be happy to review it.
 
 [Read more about the EU Cookie Law](http://www.cookielawinfo.com/ "More information about the EU Cookie Law")
 
@@ -67,13 +75,13 @@ See www.cookielawinfo.com for more information.
 First check you have installed the plugin and have activated it in the plugins panel.
 To check if it is switched on or not, go to 'Settings / Cookie Law Info' and then enable the header by setting 'Display cookie bar?' to 'yes'.
 
-= Are there any aditional skins/styles available? =
+= Are there any additional skins/styles available? =
 There are more coming soon. In the mean time you can manually select your styles. If you're looking for inspiration, check out http://kuler.adobe.com.
 
 = It would be great if your plugin also did XYZ =
 Please email me and I'll consider adding that feature. It would be great to hear suggestions on how to improve it.
 
-= The header doesn't work on <<< BROWSER X, Version Y, on Operating System Z >>> =
+= The header doesn't work on browser X / version Y =
 Please report a bug by emailing richard.ashby@mediacreek.com with a subject line of "Cookie Law Info WordPress plugin".
 Be sure to include the following information:
 
