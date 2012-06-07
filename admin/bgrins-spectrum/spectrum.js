@@ -4,8 +4,8 @@
 // License: MIT
 // Requires: jQuery, spectrum.css
 
-(function (window, jQuery, undefined) {
-	var defaultOpts = {
+(function (window, $, undefined) {
+    var defaultOpts = {
         
         // Events
         beforeShow: noop,
@@ -34,7 +34,7 @@
         selectionPalette: []
     },
     spectrums = [],
-    IE = jQuery.browser.msie,
+    IE = $.browser.msie,
     replaceInput = [
         "<div class='sp-replacer'>",
             "<div class='sp-preview'></div>",
@@ -105,7 +105,7 @@
         }
     }
     function instanceOptions(o, callbackContext) {
-        var opts = jQuery.extend({}, defaultOpts, o);
+        var opts = $.extend({}, defaultOpts, o);
         opts.callbacks = {
             'move': bind(opts.move, callbackContext),
             'change': bind(opts.change, callbackContext),
@@ -141,14 +141,14 @@
             currentSaturation = 0,
             currentValue = 0,
             palette = opts.palette.slice(0),
-            paletteArray = jQuery.isArray(palette[0]) ? palette : [palette],
+            paletteArray = $.isArray(palette[0]) ? palette : [palette],
             selectionPalette = opts.selectionPalette.slice(0),
             draggingClass = "sp-dragging";
 
         var doc = element.ownerDocument,
             body = doc.body,
-            boundElement = jQuery(element),
-            container = jQuery(markup, doc).addClass(theme),
+            boundElement = $(element),
+            container = $(markup, doc).addClass(theme),
             dragger = container.find(".sp-color"),
             dragHelper = container.find(".sp-dragger"),
             slider = container.find(".sp-hue"),
@@ -160,7 +160,7 @@
             chooseButton = container.find(".sp-choose"),
             isInput = boundElement.is("input"),
             shouldReplace = isInput && !flat,
-            replacer = (shouldReplace) ? jQuery(replaceInput).addClass(theme) : jQuery([]),
+            replacer = (shouldReplace) ? $(replaceInput).addClass(theme) : $([]),
             offsetElement = (shouldReplace) ? replacer : boundElement,
             previewElement = replacer.find(".sp-preview"),
             initialColor = opts.color || (isInput && boundElement.val()),
@@ -194,7 +194,7 @@
                 boundElement.after(container).hide();
             }
             else {
-                jQuery(body).append(container.hide());
+                $(body).append(container.hide());
             }
             if (localStorageKey && window.localStorage) {
                 try {
@@ -210,7 +210,7 @@
 
                 e.stopPropagation();
 
-                if (!jQuery(e.target).is("input")) {
+                if (!$(e.target).is("input")) {
                     e.preventDefault();
                 }
             });
@@ -228,7 +228,6 @@
             cancelButton.bind("click.spectrum", function (e) {
                 e.stopPropagation();
                 e.preventDefault();
-
                 hide();
             });
 
@@ -237,7 +236,7 @@
                 e.preventDefault();
 
                 if (isValid()) {
-                    updateOriginalInput();
+                    updateOriginalInput(true);
                     hide();
                 }
             });
@@ -254,7 +253,7 @@
             }, dragStart, dragStop);
             
             if (!!initialColor) {
-                set(initialColor, true);
+                set(initialColor);
                 addColorToSelectionPalette(initialColor);
             }
             else {
@@ -267,11 +266,12 @@
 
             function palletElementClick(e) {
                 if (e.data && e.data.ignore) {
-                    set(jQuery(this).data("color"), true);
+                    set($(this).data("color"));
                     move();
                 }
                 else {
-                    set(jQuery(this).data("color"));
+                    set($(this).data("color"));
+                    updateOriginalInput(true);
                     move();
                     hide();
                 }
@@ -323,7 +323,7 @@
 
             var currentColor = get();
 
-            var html = jQuery.map(paletteArray, function (palette, i) {
+            var html = $.map(paletteArray, function (palette, i) {
                 return paletteTemplate(palette, currentColor, "sp-palette-row sp-palette-row-" + i);
             });
 
@@ -352,7 +352,7 @@
         function setFromTextInput() {
             var tiny = tinycolor(textInput.val());
             if (tiny.ok) {
-                set(tiny, true);
+                set(tiny);
             }
             else {
                 textInput.addClass("sp-validation-error");
@@ -373,8 +373,8 @@
             hideAll();
             visible = true;
 
-            jQuery(doc).bind("click.spectrum", hide);
-            jQuery(window).bind("resize.spectrum", resize);
+            $(doc).bind("click.spectrum", hide);
+            $(window).bind("resize.spectrum", resize);
             replacer.addClass("sp-active");
             container.show();
 
@@ -394,8 +394,8 @@
             if (!visible || flat) { return; }
             visible = false;
 
-            jQuery(doc).unbind("click.spectrum", hide);
-            jQuery(window).unbind("resize.spectrum", resize);
+            $(doc).unbind("click.spectrum", hide);
+            $(window).unbind("resize.spectrum", resize);
 
             replacer.removeClass("sp-active");
             container.hide();
@@ -404,7 +404,7 @@
 
             if (colorHasChanged) {
                 if (clickoutFiresChange) {
-                    updateOriginalInput();
+                    updateOriginalInput(true);
                 }
                 else {
                     revert();
@@ -415,10 +415,10 @@
         }
 
         function revert() {
-            set(colorOnShow, true, true);
+            set(colorOnShow, true);
         }
-        
-        function set(color, ignoreChange, ignoreFormatChange) {
+
+        function set(color, ignoreFormatChange) {
             if (tinycolor.equals(color, get())) {
                 return;
             }
@@ -434,11 +434,6 @@
 
             if (!ignoreFormatChange) {
                 currentPreferredFormat = preferredFormat || newColor.format;
-            }
-            
-            // set can be called from a default value,  don't want to trigger a change in that case
-            if (!ignoreChange && !tinycolor.equals(color, colorOnShow)) {
-                updateOriginalInput();
             }
         }
 
@@ -512,19 +507,21 @@
             });
         }
 
-        function updateOriginalInput() {
+        function updateOriginalInput(fireCallback) {
             var color = get();
             
             if (isInput) {
                 boundElement.val(color.toString(currentPreferredFormat)).change();
             }
             
+            var hasChanged = !tinycolor.equals(color, colorOnShow);
             colorOnShow = color;
 
             // Update the selection palette with the current color
             addColorToSelectionPalette(color);
-                
-            callbacks.change(color);
+            if (fireCallback && hasChanged) {
+                callbacks.change(color);
+            }
         }
 
         function reflow() {
@@ -556,7 +553,8 @@
             show: show,
             hide: hide,
             set: function (c) {
-                set(c, true);
+                set(c);
+                updateOriginalInput();
             },
             get: get,
             destroy: destroy,
@@ -580,8 +578,8 @@
         var inputHeight = input.outerHeight();
         var doc = picker[0].ownerDocument;
         var docElem = doc.documentElement;
-        var viewWidth = docElem.clientWidth + jQuery(doc).scrollLeft();
-        var viewHeight = docElem.clientHeight + jQuery(doc).scrollTop();
+        var viewWidth = docElem.clientWidth + $(doc).scrollLeft();
+        var viewHeight = docElem.clientHeight + $(doc).scrollTop();
         var offset = input.offset();
         offset.top += inputHeight;
 
@@ -635,7 +633,7 @@
         var offset = {};
         var maxHeight = 0;
         var maxWidth = 0;
-        var IE = jQuery.browser.msie;
+        var IE = $.browser.msie;
         var hasTouch = ('ontouchstart' in window);
 
         var duringDragEvents = {};
@@ -683,12 +681,12 @@
             if (!rightclick && !dragging) {
                 if (onstart.apply(element, arguments) !== false) {
                     dragging = true;
-                    maxHeight = jQuery(element).height();
-                    maxWidth = jQuery(element).width();
-                    offset = jQuery(element).offset();
+                    maxHeight = $(element).height();
+                    maxWidth = $(element).width();
+                    offset = $(element).offset();
 
-                    jQuery(doc).bind(duringDragEvents);
-                    jQuery(doc.body).addClass("sp-dragging");
+                    $(doc).bind(duringDragEvents);
+                    $(doc.body).addClass("sp-dragging");
 
                     if (!hasTouch) {
                         move(e);
@@ -700,14 +698,14 @@
         }
         function stop() {
             if (dragging) {
-                jQuery(doc).unbind(duringDragEvents);
-                jQuery(doc.body).removeClass("sp-dragging");
+                $(doc).unbind(duringDragEvents);
+                $(doc.body).removeClass("sp-dragging");
                 onstop.apply(element, arguments);
             }
             dragging = false;
         }
 
-        jQuery(element).bind(hasTouch ? "touchstart" : "mousedown", start);
+        $(element).bind(hasTouch ? "touchstart" : "mousedown", start);
     }
 
     function throttle(func, wait, debounce) {
@@ -728,23 +726,23 @@
     * Define a jQuery plugin
     */
     var dataID = "spectrum.id";
-    jQuery.fn.spectrum = function (opts, extra) {
+    $.fn.spectrum = function (opts, extra) {
         if (typeof opts == "string") {
             if (opts == "get") {
                 return spectrums[this.eq(0).data(dataID)].get();
             } else if (opts == "container") {
-                return spectrums[jQuery(this).data(dataID)].container;
+                return spectrums[$(this).data(dataID)].container;
             }
 
             return this.each(function () {
-                var spect = spectrums[jQuery(this).data(dataID)];
+                var spect = spectrums[$(this).data(dataID)];
                 if (spect) {
                     if (opts == "show") { spect.show(); }
                     if (opts == "hide") { spect.hide(); }
                     if (opts == "set") { spect.set(extra); }
                     if (opts == "destroy") {
                         spect.destroy();
-                        jQuery(this).removeData(dataID);
+                        $(this).removeData(dataID);
                     }
                 }
             });
@@ -753,26 +751,26 @@
         // Initializing a new one
         return this.spectrum("destroy").each(function () {
             var spect = spectrum(this, opts);
-            jQuery(this).data(dataID, spect.id);
+            $(this).data(dataID, spect.id);
         });
     };
 
-    jQuery.fn.spectrum.load = true;
-    jQuery.fn.spectrum.loadOpts = {};
-    jQuery.fn.spectrum.draggable = draggable;
+    $.fn.spectrum.load = true;
+    $.fn.spectrum.loadOpts = {};
+    $.fn.spectrum.draggable = draggable;
 
-    jQuery.fn.spectrum.processNativeColorInputs = function() {
-        var supportsColor = jQuery("<input type='color' />")[0].type === "color";       
+    $.fn.spectrum.processNativeColorInputs = function() {
+        var supportsColor = $("<input type='color' />")[0].type === "color";       
         if (!supportsColor) {
-            jQuery("input[type=color]").spectrum({
+            $("input[type=color]").spectrum({
                 preferredFormat: "hex6"
             });
         }
     };
     
-    jQuery(function () {
-        if (jQuery.fn.spectrum.load) {
-            jQuery.fn.spectrum.processNativeColorInputs();
+    $(function () {
+        if ($.fn.spectrum.load) {
+            $.fn.spectrum.processNativeColorInputs();
         }
     });
 
@@ -1563,4 +1561,3 @@
     window.tinycolor = tinycolor;
 
 })(this);
-
