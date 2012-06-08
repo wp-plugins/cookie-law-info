@@ -12,10 +12,17 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-This plugin adds a subtle banner to your website, either in the header or footer, to highlight your compliance status regarding the new EU Cookie Law. It also has a Cookie Audit module so you can easily show what cookies your site uses and display them neatly in a table on your Privacy & Cookies Policy page.
+This plugin adds a subtle banner to your website, either in the header or footer, to highlight your compliance status regarding the new EU Cookie Law.
+
+
+It also has a Cookie Audit module so you can easily show what cookies your site uses and display them neatly in a table on your Privacy & Cookies Policy page.
+
+
 Inline with official ICO guidelines and current industry best practice, this plugin uses 'implied consent' to aid you in showing your compliance status. This is a deliberate design choice that does not proactively block cookies: it doesn't make your visitors take action before they can use your website, and will not interfere with blog comments and [Google] Analytics. This approach is aimed at reducing website visitor dropout and maintaining your vital analytics data.
 
+
 Note: the EU Cookie Law is officially called the 'EU ePrivacy Directive'.
+
 
 For a demo, [check out the EU Cookie Law website](http://www.cookielawinfo.com/ "Demo the EU Cookie Law plugin"), including the table of cookies on the Privacy Policy page.
 
@@ -151,10 +158,11 @@ The more information you give, the quicker I can respond.
 
 == Screenshots ==
 
-1. Header (with default styles)
-2. Admin panel
-3. Admin panel - styling the form with colour pickers
-4. Header (with custom styles)
+1. Cookie bar in footer (with default styles)
+2. Cookie bar "show again tab" (optional- can be switched off or position can be changed)
+3. Admin panel
+4. Cookie Audit - list your cookies
+5. Cookie table displayed on your Privacy Policy page
 
 == Changelog ==
 
