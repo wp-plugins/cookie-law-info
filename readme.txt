@@ -4,7 +4,7 @@ Donate link: http://www.movember.com/
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 3.3.2
-Stable tag: 2.0
+Stable tag: 1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
