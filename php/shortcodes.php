@@ -65,6 +65,8 @@ function cookielawinfo_table_shortcode( $atts ) {
 		'not_shown_message' => ''
 	), $atts ) );
 	
+	global $post;
+	
 	$args = array(
 		'post_type' => 'cookielawinfo',
 		'posts_per_page' => 10,
@@ -87,8 +89,8 @@ function cookielawinfo_table_shortcode( $atts ) {
 	while ( $cookies->have_posts() ) : $cookies->the_post();
 		// Get custom fields:
 		$custom = get_post_custom( $post->ID );
-		$cookie_type = $custom["cookie_type"][0];
-		$cookie_duration = $custom["cookie_duration"][0];
+		$cookie_type = ( isset ( $custom["_cli_cookie_type"][0] ) ) ? $custom["_cli_cookie_type"][0] : '';
+		$cookie_duration = ( isset ( $custom["_cli_cookie_duration"][0] ) ) ? $custom["_cli_cookie_duration"][0] : '';
 		// Output HTML:
 		$ret .= '<tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">' . get_the_title() . '</td>';
 		$ret .= '<td class="cookielawinfo-column-2">' . $cookie_type .'</td>';
@@ -112,37 +114,6 @@ function cookielawinfo_shortcode_accept_button( $atts ) {
 
 /** Returns HTML for a generic button */
 function cookielawinfo_shortcode_more_link( $atts ) {
-	/*
-	$defaults = array(
-		'button_2_text' => 'Accept',
-		'button_2_url' => '#',
-		'button_2_action' => '#cookie_action_close_header',
-		
-		'button_2_link_colour' => '#fff',
-		'button_2_new_win' => false,
-		'button_2_as_button' => true,
-		'button_2_button_colour' => '0f0',
-		'button_2_button_size' => 'medium'
-	);
-	$settings = wp_parse_args( cookielawinfo_get_admin_settings(), $defaults );
-	
-	$class = '';
-	if ( $settings['button_2_as_button'] ) {
-		$class .= ' class="' . $settings['button_2_button_size'] . ' cli-plugin-button orange"';
-	}
-	else {
-		$class .= ' style="color:' . $settings['button_2_link_colour'] . ' !important;text-decoration:underline;"' ;
-	}
-	
-	// If is action not URL then don't use URL!
-	$url = ( $settings['button_2_action'] == "CONSTANT_OPEN_URL" ) ? $settings['button_2_url'] : "#";
-	
-	$link_tag = '<a href="' . $url . '" id="' . cookielawinfo_remove_hash ( $settings['button_2_action'] ) . '" ';
-	$link_tag .= ( $settings['button_2_new_win'] ) ? 'target="_new" ' : '' ;
-	$link_tag .= $class . ' >' . $settings['button_2_text'] . '</a>';
-	
-	return $link_tag;
-	*/
 	return cookielawinfo_shortcode_button_DRY_code( 'button_2' );
 }
 
@@ -179,6 +150,7 @@ function cookielawinfo_shortcode_main_button( $atts ) {
 	
 	return $link_tag;
 }
+
 
 /** Returns HTML for a generic button */
 function cookielawinfo_shortcode_button_DRY_code( $name ) {

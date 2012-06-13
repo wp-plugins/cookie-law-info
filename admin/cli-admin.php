@@ -199,7 +199,8 @@ function cookielawinfo_allowed_html() {
 			'id' => array(),
 			'class' => array(),
 			'title' => array(),
-			'target' => array()
+			'target' => array(),
+			'rel' => array()
 		),
 		'b' => array(),
 		'br' => array(
@@ -210,7 +211,10 @@ function cookielawinfo_allowed_html() {
 			'id' => array(),
 			'class' => array()
 		),
-		'em' => array (),
+		'em' => array (
+			'id' => array(),
+			'class' => array()
+		),
 		'i' => array(),
 		'img' => array(
 			'src' => array(),
@@ -226,7 +230,10 @@ function cookielawinfo_allowed_html() {
 			'id' => array(),
 			'class' => array()
 		),
-		'strong' => array(),
+		'strong' => array(
+			'id' => array(),
+			'class' => array()
+		),
 	);
 	return $allowed_html;
 }
@@ -293,7 +300,7 @@ function cookielawinfo_sanitise($key, $value) {
 				$ret =  '#000';
 			}
 			break;
-		// Allow some HTML, but no JavaScript:
+		// Allow some HTML, but no JavaScript. Note that deliberately NOT stripping out line breaks here, that's done when sending JavaScript parameter elsewhere:
 		case 'notify_message':
 			$ret = wp_kses( $value, cookielawinfo_allowed_html(), cookielawinfo_allowed_protocols() );
 			break;
@@ -354,11 +361,15 @@ function cookielawinfo_custom_dashboard_styles( $hook ) {
 
 
 /**
- Adds custom script to admin panel to run the colour pickers
+ Adds custom script to cookielawinfo admin panel to run the colour pickers
  Important: these scripts only load on the plugin settings page (avoids conflicts)
  Hooked into admin_footer
  */
 function cookielawinfo_custom_dashboard_styles_my_colours() {
+	$screen = get_current_screen();
+	if ( $screen->post_type != 'cookielawinfo' ) {
+		return;
+	}
 	if( cookielawinfo_colourpicker_enabled() ) {
     	wp_enqueue_script('spectrum-custom', plugins_url('/cookie-law-info/admin/bgrins-spectrum/my-colours.js'));
 	}

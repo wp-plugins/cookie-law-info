@@ -3,16 +3,19 @@ Contributors: richardashby
 Donate link: http://www.movember.com/
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
-Tested up to: 3.3.2
-Stable tag: 1.0.1
+Tested up to: 3.4
+Stable tag: 1.0.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-*UPDATED* A simple way to show how your website complies with the EU Cookie Law, which came into force on 26 May 2012.
+A simple way to show how your website complies with the EU Cookie Law. Implied Consent. Style it to match your own website.
 
 == Description ==
 
-This plugin adds a subtle banner to your website, either in the header or footer, to highlight your compliance status regarding the new EU Cookie Law.
+This plugin uses implied consent, adding a subtle banner to your website either in the header or footer so you can show your compliance status regarding the new EU Cookie Law.
+
+
+You can fully customise the style so it fits in with your existing website- change the colours, fonts, styles, the position on the page and even how it behaves when you click "accept".
 
 
 It also has a Cookie Audit module so you can easily show what cookies your site uses and display them neatly in a table on your Privacy & Cookies Policy page.
@@ -21,28 +24,21 @@ It also has a Cookie Audit module so you can easily show what cookies your site 
 Inline with official ICO guidelines and current industry best practice, this plugin uses 'implied consent' to aid you in showing your compliance status. This is a deliberate design choice that does not proactively block cookies: it doesn't make your visitors take action before they can use your website, and will not interfere with blog comments and [Google] Analytics. This approach is aimed at reducing website visitor dropout and maintaining your vital analytics data.
 
 
-Note: the EU Cookie Law is officially called the 'EU ePrivacy Directive'.
+[Read the ICO's guidelines on implied consent](http://www.ico.gov.uk/news/blog/2012/updated-ico-advice-guidance-e-privacy-directive-eu-cookie-law.aspx "Read the ICO's guidelines on implied consent")
 
+Note: the EU Cookie Law is officially called the 'EU ePrivacy Directive'.
 
 For a demo, [check out the EU Cookie Law website](http://www.cookielawinfo.com/ "Demo the EU Cookie Law plugin"), including the table of cookies on the Privacy Policy page.
 
 
 Features:
 
-* Fully customisable dropdown header: position, colours, styles, fonts, use HTML and shortcodes
-* Website visitors can dismiss the message, so that will not be shown again (uses a cookie)
-* Optional "show again" tab - fully customisable including position shown on page
-* NEW: "Cookie Audit" shortcode to construct a nicely-styled 'Privacy & Cookie Policy'
-* NEW: shortcodes for fancy button styles
-* Shortcode to allow visitor to delete cookie used to control header
-* Able to switch header on/off without losing settings or having to disable plugin
-* NEW: improved user interface
-* NEW: improved help section
+* Fully customisable to look just like your own website's style: customise the colours, styles and fonts
+* Put the cookie bar in either the header or the footer
+* (Optional) cookie bar can be permanently dismissed or accessible through a "show again" tab
+* (Optional) "show again" tab is fully customisable including position shown on page and styles
+* "Cookie Audit" shortcode to construct a nicely-styled 'Privacy & Cookie Policy'
 
-Coming soon:
-
-* Language translations
-* Cookie Law Info Plus - even more customisation and cookie control features
 
 [Read more about the EU Cookie Law](http://www.cookielawinfo.com/ "More information about the EU Cookie Law")
 
@@ -158,11 +154,10 @@ The more information you give, the quicker I can respond.
 
 == Screenshots ==
 
-1. Cookie bar in footer (with default styles)
-2. Cookie bar "show again tab" (optional- can be switched off or position can be changed)
-3. Admin panel
-4. Cookie Audit - list your cookies
-5. Cookie table displayed on your Privacy Policy page
+1. Header (with default styles)
+2. Admin panel
+3. Admin panel - styling the form with colour pickers
+4. Header (with custom styles)
 
 == Changelog ==
 

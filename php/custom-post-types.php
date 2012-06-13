@@ -37,17 +37,46 @@ function cookielawinfo_register_custom_post_type() {
 	$args = array(
 		'labels'				=> $labels,
 		'public'				=> true,
-		'publicly_queryable'	=> true,
+		'publicly_queryable'	=> false,
+		'exclude_from_search'	=> true,
 		'show_ui'				=> true,
 		'query_var'				=> true,
-		//'menu_icon'				=> CLI_PLUGIN_URL . '/images/icon.gif',
 		'rewrite'				=> true,
 		'capability_type'		=> 'post',
 		'hierarchical'			=> false,
 		'menu_position'			=> null,
-		'supports'				=> array( 'title','editor','thumbnail' )
-	  ); 
+		'supports'				=> array( 'title','editor' )
+	); 
 	register_post_type( 'cookielawinfo' , $args );
+	
+	// Migrate custom meta:
+	cookielawinfo_migrate_custom_meta();
+}
+
+
+/** Updates custom meta to fix bug in version 1.0.1 */
+function cookielawinfo_migrate_custom_meta() {
+	global $post;
+	$args = array('post_type' => 'cookielawinfo');
+	$cookies = new WP_Query( $args );
+	
+	if ( !$cookies->have_posts() ) {
+		return;
+	}
+	
+	while ( $cookies->have_posts() ) : $cookies->the_post();
+		// Get custom fields:
+		$custom = get_post_custom( $post->ID );
+		// Look for old values. If they exist, move them to new values then delete old values:
+		if ( isset ( $custom["cookie_type"][0] ) ) {
+			update_post_meta( $post->ID, "_cli_cookie_type", sanitize_text_field( $custom["cookie_type"][0] ) );
+			delete_post_meta( $post->ID, "cookie_type", $custom["cookie_type"][0] );
+		}
+		if ( isset ( $custom["cookie_duration"][0] ) ) {
+			update_post_meta( $post->ID, "_cli_cookie_duration", sanitize_text_field( $custom["cookie_duration"][0] ) );
+			delete_post_meta( $post->ID, "cookie_duration", $custom["cookie_duration"][0] );
+		}
+	endwhile;
 }
 
 
@@ -57,8 +86,8 @@ function cookielawinfo_register_custom_post_type() {
  	- Cookie Duration (e.g. 2 hours, days, years, etc)
  */
 function cookielawinfo_custom_posts_admin_init() {
-	add_meta_box("cookie_type", "Cookie Type", "cookielawinfo_cookie_type", "cookielawinfo", "normal", "low");
-	add_meta_box("cookie_duration", "Cookie Duration", "cookielawinfo_cookie_duration", "cookielawinfo", "normal", "low");
+	add_meta_box("_cli_cookie_type", "Cookie Type", "cookielawinfo_cookie_type", "cookielawinfo", "side", "default");
+	add_meta_box("_cli_cookie_duration", "Cookie Duration", "cookielawinfo_cookie_duration", "cookielawinfo", "side", "default");
 }
 
 
@@ -66,10 +95,10 @@ function cookielawinfo_custom_posts_admin_init() {
 function cookielawinfo_cookie_type() {
 	global $post;
 	$custom = get_post_custom( $post->ID );
-	$cookie_type = $custom["cookie_type"][0];
+	$cookie_type = ( isset ( $custom["_cli_cookie_type"][0] ) ) ? $custom["_cli_cookie_type"][0] : '';
 	?>
 	<label>Cookie Type:</label>
-	<input name="cookie_type" value="<?php echo sanitize_text_field( $cookie_type ); ?>" />
+	<input name="_cli_cookie_type" value="<?php echo sanitize_text_field( $cookie_type ); ?>" style="width:95%;" />
 	<?php
 }
 
@@ -78,10 +107,10 @@ function cookielawinfo_cookie_type() {
 function cookielawinfo_cookie_duration() {
 	global $post;
 	$custom = get_post_custom( $post->ID );
-	$cookie_duration = $custom["cookie_duration"][0];
+	$cookie_duration = ( isset ( $custom["_cli_cookie_duration"][0] ) ) ? $custom["_cli_cookie_duration"][0] : '';
 	?>
 	<label>Cookie Duration:</label>
-	<input name="cookie_duration" value="<?php echo sanitize_text_field( $cookie_duration ); ?>" />
+	<input name="_cli_cookie_duration" value="<?php echo sanitize_text_field( $cookie_duration ); ?>" style="width:95%;" />
 	<?php
 }
 
@@ -89,8 +118,8 @@ function cookielawinfo_cookie_duration() {
 /** Saves all form data from custom post meta boxes, including saitisation of input */
 function cookielawinfo_save_custom_metaboxes(){
 	global $post;
-	update_post_meta( $post->ID, "cookie_type", sanitize_text_field( $_POST["cookie_type"] ) );
-	update_post_meta( $post->ID, "cookie_duration", sanitize_text_field( $_POST["cookie_duration"] ) );
+	update_post_meta( $post->ID, "_cli_cookie_type", sanitize_text_field( $_POST["_cli_cookie_type"] ) );
+	update_post_meta( $post->ID, "_cli_cookie_duration", sanitize_text_field( $_POST["_cli_cookie_duration"] ) );
 }
 
 
@@ -117,11 +146,15 @@ function cookielawinfo_custom_columns( $column ) {
 		break;
 	case "type":
 		$custom = get_post_custom();
-		echo $custom["cookie_type"][0];
+		if ( isset ( $custom["_cli_cookie_type"][0] ) ) {
+			echo $custom["_cli_cookie_type"][0];
+		}
 		break;
 	case "duration":
 		$custom = get_post_custom();
-		echo $custom["cookie_duration"][0];
+		if ( isset ( $custom["_cli_cookie_duration"][0] ) ) {
+			echo $custom["_cli_cookie_duration"][0];
+		}
 		break;
 	}
 }

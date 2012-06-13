@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/cookie-law-info/description/
 Description: A simple way of 'implied consent' to show your website complies with the EU Cookie Law, which came into force on 26 May 2012.
 Author: Richard Ashby
 Author URI: http://www.cookielawinfo.com/
-Version: 1.0.1
+Version: 1.0.2
 License: GPL2
 	
 	===============================================================================
@@ -94,11 +94,39 @@ function cookielawinfo_activate() {
 }
 
 
-/** Uninstalls the plugin (removes settings) */
+/** Uninstalls the plugin (removes settings and custom meta) */
 function cookielawinfo_uninstall_plugin() {
+	// Bye bye settings:
 	delete_option( CLI_ADMIN_OPTIONS_NAME );
 	delete_option( CLI_MIGRATED_VERSION );
 	delete_option( CLI_SETTINGS_FIELD );
+	
+	// Bye bye custom meta:
+	global $post;
+	$args = array('post_type' => 'cookielawinfo');
+	$cookies = new WP_Query( $args );
+	
+	if ( !$cookies->have_posts() ) {
+		return;
+	}
+	
+	while ( $cookies->have_posts() ) : $cookies->the_post();
+		// Get custom fields:
+		$custom = get_post_custom( $post->ID );
+		// Look for old values. If they exist, move them to new values then delete old values:
+		if ( isset ( $custom["cookie_type"][0] ) ) {
+			delete_post_meta( $post->ID, "cookie_type", $custom["cookie_type"][0] );
+		}
+		if ( isset ( $custom["cookie_duration"][0] ) ) {
+			delete_post_meta( $post->ID, "cookie_duration", $custom["cookie_duration"][0] );
+		}
+		if ( isset ( $custom["_cli_cookie_type"][0] ) ) {
+			delete_post_meta( $post->ID, "_cli_cookie_type", $custom["_cli_cookie_type"][0] );
+		}
+		if ( isset ( $custom["_cli_cookie_duration"][0] ) ) {
+			delete_post_meta( $post->ID, "_cli_cookie_duration", $custom["_cli_cookie_duration"][0] );
+		}
+	endwhile;
 }
 
 

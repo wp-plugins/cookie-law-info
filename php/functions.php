@@ -79,21 +79,49 @@ function cookielawinfo_inject_cli_script() {
 		
 	if ( $the_options['is_on'] == true ) {
 		
+		// Process string for JavaScript
+		// REFACTOR / DEBUG:
+		// Consider using esc_js( $str ) instead of manually correcting (though is > WP v2.8 only, hence doing manually)
+		
 		// $str processes shortcodes:
 		$str = addslashes ( do_shortcode( stripslashes ( $the_options['notify_message'] ) ) );
+		
+		// Remove line breaks (breaks JavaScript if param is split over > 1 lines)
+		$line_breaks = array("\r\n", "\n", "\r");
+		$str = str_replace($line_breaks, '<br />', $str);
 		
 		// You can construct your own HTML and CSS here if needed.
 		$notify_html = '<div id="' . cookielawinfo_remove_hash( $the_options["notify_div_id"] ) . '"><span>' . $str . '</span></div>';
 		
 		if ( $the_options['showagain_tab'] === true ) {
-			$notify_html .= '<div id="' . cookielawinfo_remove_hash( $the_options["showagain_div_id"] ) . '"><span="#" id="cookie_hdr_showagain">' . $the_options["showagain_text"] . '</span></div>';
+			$notify_html .= '<div id="' . cookielawinfo_remove_hash( $the_options["showagain_div_id"] ) . '"><span id="cookie_hdr_showagain">' . $the_options["showagain_text"] . '</span></div>';
 		}
 		
-		echo '<script type="text/javascript">';
-		echo '	jQuery(document).ready(function() {';
-		echo "		cli_show_cookiebar('" . $notify_html . "', '" . cookielawinfo_get_json_settings() . "');";
-		echo '	});';
-		echo '</script>';
+		?>
+		
+		<script type="text/javascript">
+			//<![CDATA[
+			jQuery(document).ready(function() {
+				var a = '<?php echo $notify_html; ?>';
+				var b = '<?php echo cookielawinfo_get_json_settings(); ?>';
+				cli_show_cookiebar(a,b);
+				
+				<?php
+					// Note to developers:
+					// Here's a debug routine that you can use in case the cookie bar is giving you trouble.
+					// Switch CLI_PLUGIN_DEVELOPMENT_MODE to true then call as e.g. http://www.yourwebsite.com/?cli-debug=all
+					// Options: all | html | json
+					if ( CLI_PLUGIN_DEVELOPMENT_MODE ) {
+						?>
+						function getURLParameter(name){return decodeURI((RegExp(name+'='+'(.+?)(&|$)').exec(location.search)||[,null])[1]);}var p=eval('('+b+')');var t='';for(prop in p){if (!p.hasOwnProperty(prop)){continue;}t+=prop+" = "+p[prop]+"\n";}switch(getURLParameter("cli-debug")){case "json":alert(t);break;case "html":alert(a);break;case "all":alert(t);alert(a);break;default:}
+						<?php
+					}
+				?>
+			});
+			//]]>
+		</script>
+		
+		<?php
 	}
 }
 
@@ -267,7 +295,5 @@ function cookielawinfo_debug_admin_settings( $break ) {
 	$ret .= '</p>';
 	return $ret;
 }
-
-/* Debug script for JS: var s=eval("("+json_payload+")");var t='';for(p in s){if(!s.hasOwnProperty(p)){continue;}t+=p+" = "+s[p]+"\n";}alert(t);alert(html); */
 
 ?>
