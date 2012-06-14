@@ -116,10 +116,15 @@ function cookielawinfo_cookie_duration() {
 
 
 /** Saves all form data from custom post meta boxes, including saitisation of input */
-function cookielawinfo_save_custom_metaboxes(){
+function cookielawinfo_save_custom_metaboxes() {
 	global $post;
-	update_post_meta( $post->ID, "_cli_cookie_type", sanitize_text_field( $_POST["_cli_cookie_type"] ) );
-	update_post_meta( $post->ID, "_cli_cookie_duration", sanitize_text_field( $_POST["_cli_cookie_duration"] ) );
+	
+	if ( isset ( $_POST["_cli_cookie_type"] ) ) {
+		update_post_meta( $post->ID, "_cli_cookie_type", sanitize_text_field( $_POST["_cli_cookie_type"] ) );
+    }
+    if ( isset ( $_POST["_cli_cookie_type"] ) ) {
+		update_post_meta( $post->ID, "_cli_cookie_duration", sanitize_text_field( $_POST["_cli_cookie_duration"] ) );
+	}
 }
 
 
