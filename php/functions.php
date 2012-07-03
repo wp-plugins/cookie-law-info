@@ -37,11 +37,11 @@ function cookielawinfo_get_json_settings() {
 		'border'						=> $settings['border'],
 		'border_on'						=> $settings['border_on'],
 		'button_1_button_colour'		=> $settings['button_1_button_colour'],
-		'button_1_button_hover'			=> (su_hex_shift( $settings['button_1_button_colour'], 'down', 20 )),
+		'button_1_button_hover'			=> (cookielawinfo_su_hex_shift( $settings['button_1_button_colour'], 'down', 20 )),
 		'button_1_link_colour'			=> $settings['button_1_link_colour'],
 		'button_1_as_button'			=> $settings['button_1_as_button'],
 		'button_2_button_colour'		=> $settings['button_2_button_colour'],
-		'button_2_button_hover'			=> (su_hex_shift( $settings['button_2_button_colour'], 'down', 20 )),
+		'button_2_button_hover'			=> (cookielawinfo_su_hex_shift( $settings['button_2_button_colour'], 'down', 20 )),
 		'button_2_link_colour'			=> $settings['button_2_link_colour'],
 		'button_2_as_button'			=> $settings['button_2_as_button'],
 		'font_family'					=> $settings['font_family'],
@@ -160,7 +160,7 @@ function cookielawinfo_enqueue_frontend_scripts() {
  * @return string shifted hex value
  * @version 1.0 2008-03-28
  */
-function su_hex_shift( $supplied_hex, $shift_method, $percentage = 50 ) {
+function cookielawinfo_su_hex_shift( $supplied_hex, $shift_method, $percentage = 50 ) {
 	$shifted_hex_value = null;
 	$valid_shift_option = FALSE;
 	$current_set = 1;
