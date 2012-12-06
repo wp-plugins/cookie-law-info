@@ -18,7 +18,6 @@ function cli_show_cookiebar( html, json_payload ) {
 	
 	var hdr_args = {
 		'background-color': settings.background,
-		'background-image': 'url(' + settings.background_url + ')',
 		'color': settings.text,
 		'font-family': settings.font_family
 	};

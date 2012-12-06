@@ -4,7 +4,7 @@ Donate link: http://www.movember.com/
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 3.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -177,6 +177,9 @@ The more information you give, the quicker I can respond.
 * Enhanced help section
 * Refactored codebase, improved jQuery performance
 * Bugs fixed: no more slashes in Message Box
+
+= 1.0.3 =
+* Fixed bug where JavaScript generated an http 404 error.
 
 == Upgrade Notice ==
 
