@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: richardashby
-Donate link: http://www.movember.com/
+Donate link: http://mobro.co/richashby
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 3.4
