@@ -60,6 +60,11 @@ function cookielawinfo_delete_cookies_shortcode( $atts ) {
  						included with plugin.
 */
 function cookielawinfo_table_shortcode( $atts ) {
+	
+	/** RICHARDASHBY EDIT: only add CSS if table is being used */
+	wp_enqueue_style( 'cookielawinfo-table-style' );
+	/** END EDIT */
+	
 	extract( shortcode_atts( array(
 		'style' => 'classic',
 		'not_shown_message' => ''
@@ -69,7 +74,8 @@ function cookielawinfo_table_shortcode( $atts ) {
 	
 	$args = array(
 		'post_type' => 'cookielawinfo',
-		'posts_per_page' => 10,
+		/** 28/05/2013: Changing from 10 to 50 to allow longer tables of cookie data */
+		'posts_per_page' => 50,
 		'order' => 'ASC',
 		'orderby' => 'title'
 	);

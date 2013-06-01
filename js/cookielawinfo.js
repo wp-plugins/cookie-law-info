@@ -62,6 +62,15 @@ function cli_show_cookiebar( html, json_payload ) {
 		cached_header.hide();
 	}
 	
+	// Show once code:
+	if ( settings.show_once_yn ) {
+		setTimeout(close_header, settings.show_once);
+	}
+	function close_header() {
+		jQuery.cookie(ACCEPT_COOKIE_NAME, 'yes', { expires: ACCEPT_COOKIE_EXPIRE, path: '/' });
+		hideHeader();
+	}
+	
 	var main_button = jQuery('.cli-plugin-main-button');
 	main_button.css( 'color', settings.button_1_link_colour );
 	
@@ -133,6 +142,15 @@ function cli_show_cookiebar( html, json_payload ) {
 			cached_header.show();
 		}
 		cached_showagain_tab.hide();
+	}
+	function hideHeader() {
+		if (settings.notify_animate_show) {
+			cached_showagain_tab.slideDown(settings.animate_speed_show);
+		}
+		else {
+			cached_showagain_tab.show();
+		}
+		cached_header.slideUp(settings.animate_speed_show);
 	}
 	
 };

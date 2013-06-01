@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/cookie-law-info/description/
 Description: A simple way of 'implied consent' to show your website complies with the EU Cookie Law, which came into force on 26 May 2012.
 Author: Richard Ashby
 Author URI: http://www.cookielawinfo.com/
-Version: 1.0.3
+Version: 1.1
 License: GPL2
 	
 	===============================================================================
@@ -43,7 +43,7 @@ License: GPL2
 
 
 // Failsafe setting (will catch any missed debug function calls), switch off ("false") in live:
-define ( 'CLI_PLUGIN_DEVELOPMENT_MODE', false );
+define ( 'CLI_PLUGIN_DEVELOPMENT_MODE', true );
 
 define ( 'CLI_PLUGIN_PATH', plugin_dir_path(__FILE__) );
 define ( 'CLI_PLUGIN_URL', plugins_url() . '/cookie-law-info/');
@@ -78,7 +78,24 @@ add_shortcode( 'cookie_button', 'cookielawinfo_shortcode_main_button' );		// a s
 
 // Dashboard styles:
 add_action( 'admin_enqueue_scripts', 'cookielawinfo_custom_dashboard_styles' );
-add_action( 'admin_footer', 'cookielawinfo_custom_dashboard_styles_my_colours' );
+
+
+/** RICHARDASHBY EDIT */
+//add_action( 'admin_footer', 'cookielawinfo_custom_dashboard_styles_my_colours' );
+
+
+
+/** RICHARDASHBY EDIT */
+// WP3.5 colour picker:
+// http://make.wordpress.org/core/2012/11/30/new-color-picker-in-wp-3-5/
+add_action( 'admin_enqueue_scripts', 'mw_enqueue_color_picker' );
+function mw_enqueue_color_picker( $hook_suffix ) {
+    // first check that $hook_suffix is appropriate for your admin page
+    wp_enqueue_style( 'wp-color-picker' );
+    wp_enqueue_script( 'my-script-handle', plugins_url('admin/cli-admin.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
+}
+
+
 
 // Cookie Audit custom post type functions:
 add_action( 'admin_init', 'cookielawinfo_custom_posts_admin_init' );

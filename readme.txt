@@ -3,8 +3,8 @@ Contributors: richardashby
 Donate link: http://mobro.co/richashby
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
-Tested up to: 3.4
-Stable tag: 1.0.3
+Tested up to: 3.5.1
+Stable tag: 1.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,6 +16,9 @@ This plugin uses implied consent, adding a subtle banner to your website either 
 
 
 You can fully customise the style so it fits in with your existing website- change the colours, fonts, styles, the position on the page and even how it behaves when you click "accept".
+
+
+You can choose to make the cookie bar disappear after a few seconds (completely configurable).
 
 
 It also has a Cookie Audit module so you can easily show what cookies your site uses and display them neatly in a table on your Privacy & Cookies Policy page.
@@ -35,6 +38,7 @@ Features:
 
 * Fully customisable to look just like your own website's style: customise the colours, styles and fonts
 * Put the cookie bar in either the header or the footer
+* (Optional) automatically close the cookie bar after a delay (delay is configurable)
 * (Optional) cookie bar can be permanently dismissed or accessible through a "show again" tab
 * (Optional) "show again" tab is fully customisable including position shown on page and styles
 * "Cookie Audit" shortcode to construct a nicely-styled 'Privacy & Cookie Policy'
@@ -181,7 +185,19 @@ The more information you give, the quicker I can respond.
 = 1.0.3 =
 * Fixed bug where JavaScript generated an http 404 error.
 
+= 1.1 =
+* New feature: auto-hide cookie bar after (configurable) delay
+* New feature: added responsive design to cookie audit table (thanks to Mark Wiltshire)
+* Upgrade: now using WP3.5 color picker
+* Bug fix: Cookie Audit table now shows maximum of 50 posts (was 10, which was a bit restrictive)
+* Bug fix: Cookie Law Info now only visible to admins
+* Bug fix: fixed typo on Dashboard help section for the [delete_cookies] shortcode
+* Bug fix: fixed "invalid header" bug
+* Performance enhancement: removed jQueryUI from admin panel and added custom (slimline) code
+* Performance enhancement: compressed CSS a bit
+* Performance enhancement: cookie audit CSS is now only downloaded on the page on which it is needed
+
 == Upgrade Notice ==
 
-= 0.9 =
-Major upgrade with several new features including show in footer, custom fonts and a new shortcode for Privacy & Cookie policy page.
+= 1.1 =
+Major upgrade with several new features including auto-hide cookie bar after (configurable) delay, responsive design plus some bug fixes and performance enhancements.

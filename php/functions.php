@@ -55,7 +55,9 @@ function cookielawinfo_get_json_settings() {
 		'showagain_border'				=> $settings['showagain_border'],
 		'showagain_div_id'				=> $settings['showagain_div_id'],
 		'showagain_x_position'			=> $settings['showagain_x_position'],
-		'text'							=> $settings['text']
+		'text'							=> $settings['text'],
+		'show_once_yn'					=> $settings['show_once_yn'],
+		'show_once'						=> $settings['show_once']
 	);
 	$str = json_encode( $slim_settings );
 	/*
@@ -145,7 +147,12 @@ function cookielawinfo_enqueue_frontend_scripts() {
 		wp_enqueue_script( 'cookie-law-info-script', CLI_PLUGIN_URL . 'js/cookielawinfo.js', array( 'jquery' ) );
 	}
 	wp_register_style( 'cookielawinfo-table-style', CLI_PLUGIN_URL . 'css/cli-tables.css' );
-	wp_enqueue_style( 'cookielawinfo-table-style' );
+	
+	/**
+	 * RICHARDASHBY EDIT: only enqueue on pages that need it
+	 * Previously this next line of code included CSS on every page, which is a waste of resources
+	 * Old >>> wp_enqueue_style( 'cookielawinfo-table-style' );
+	 */
 }
 
 

@@ -128,13 +128,28 @@ function cookielawinfo_print_admin_page() {
 					</div>
 				</div>
 				
+				<style>
+					/* http://css-tricks.com/snippets/jquery/simple-jquery-accordion/  ...with custom CSS */
+					dl.accordion dt {
+						background: #fff;
+						border: 1px #ccc solid;
+						color: #333;
+						font-size: 12px;
+						margin-bottom: 10px;
+						padding: 8px;
+						-moz-border-radius: 5px;
+						-webkit-border-radius: 5px;
+						border-radius: 5px;
+						-khtml-border-radius: 5px;
+					}
+				</style>
 				
 				<!-- Accordion -->
-				<div id="cookielawinfo-accordion">
+				<dl class="accordion">
 				
 				
-				<h3><a href="#">Settings</a></h3>
-				<div>
+				<dt class="ui-icon ui-icon-triangle-1-s"><a href="#">Settings</a></dt>
+				<dd id="accordion_default">
 					<h4>The Cookie Bar</h4>
 					<table class="form-table">
 						<tr valign="top">
@@ -196,6 +211,23 @@ function cookielawinfo_print_admin_page() {
 								</select>
 							</td>
 						</tr>
+						
+						<!-- NEW: SHOW ONCE / TIMER -->
+						<tr valign="top">
+							<th scope="row"><label for="show_once_yn_field">Auto-hide cookie bar after delay?</label></th>
+							<td>
+								<input type="radio" id="show_once_yn_yes" name="show_once_yn_field" class="styled" value="true" <?php echo ( $the_options['show_once_yn'] == true ) ? ' checked="checked" />' : ' />'; ?> Yes
+								<input type="radio" id="show_once_yn_no" name="show_once_yn_field" class="styled" value="false" <?php echo ( $the_options['show_once_yn'] == false ) ? ' checked="checked" />' : ' />'; ?> No
+							</td>
+						</tr>
+						<tr valign="top">
+							<th scope="row"><label for="show_once_field">Milliseconds until hidden</label></th>
+							<td>
+								<input type="text" name="show_once_field" value="<?php echo $the_options['show_once'] ?>" />
+								<span class="cli-plugin-example">Specify milliseconds (not seconds) e.g. <em>8000 = 8 seconds</em></span>
+							</td>
+						</tr>
+						
 					</table>
 					
 					<h4>The Show Again Tab</h4>
@@ -240,11 +272,11 @@ function cookielawinfo_print_admin_page() {
 						</tr>
 					</table>
 					
-				</div>
+				</dd>
 				
 				
-				<h3><a href="#">Cookie Law Message Bar</a></h3>
-				<div>
+				<dt><a href="#">Cookie Law Message Bar</a></dt>
+				<dd>
 					<table class="form-table">
 						<tr valign="top">
 							<th scope="row"><label for="notify_message_field">Message</label></th>
@@ -260,7 +292,11 @@ function cookielawinfo_print_admin_page() {
 							<th scope="row"><label for="background_field">Cookie Bar Colour</label></th>
 							<td>
 								<?php
-								echo '<input type="text" name="background_field" id="cli-colour-background" value="' .$the_options['background']. '" />';
+								
+								/** RICHARDASHBY EDIT */
+								//echo '<input type="text" name="background_field" id="cli-colour-background" value="' .$the_options['background']. '" />';
+								echo '<input type="text" name="background_field" id="cli-colour-background" value="' .$the_options['background']. '" class="my-color-field" data-default-color="#fff" />';
+								
 								?>
 							</td>
 						</tr>
@@ -268,7 +304,8 @@ function cookielawinfo_print_admin_page() {
 							<th scope="row"><label for="text_field">Text Colour</label></th>
 							<td>
 								<?php
-								echo '<input type="text" name="text_field" id="cli-colour-text" value="' .$the_options['text']. '" />';
+								/** RICHARDASHBY EDIT */
+								echo '<input type="text" name="text_field" id="cli-colour-text" value="' .$the_options['text']. '" class="my-color-field" data-default-color="#000" />';
 								?>
 							</td>
 						</tr>
@@ -284,7 +321,7 @@ function cookielawinfo_print_admin_page() {
 							<th scope="row"><label for="border_field">Border Colour</label></th>
 							<td>
 								<?php
-								echo '<input type="text" name="border_field" id="cli-colour-border" value="' .$the_options['border']. '" />';
+								echo '<input type="text" name="border_field" id="cli-colour-border" value="' .$the_options['border']. '" class="my-color-field" />';
 								?>
 							</td>
 						</tr>
@@ -297,11 +334,11 @@ function cookielawinfo_print_admin_page() {
 							</td>
 						</tr>
 					</table>
-				</div>
+				</dd>
 				
 				
-				<h3><a href="#">Customise Buttons</a></h3>
-				<div>
+				<dt><a href="#">Customise Buttons</a></dt>
+				<dd>
 					
 					<h4>Main Button <code>[cookie_button]</code></h4>
 					<p>This button/link can be customised to either simply close the cookie bar, or follow a link. You can also customise the colours and styles, and show it as a link or a button.</p>
@@ -339,7 +376,7 @@ function cookielawinfo_print_admin_page() {
 							<th scope="row"><label for="button_1_link_colour_field">Link colour</label></th>
 							<td>
 								<?php
-								echo '<input type="text" name="button_1_link_colour_field" id="cli-colour-link-button-1" value="' .$the_options['button_1_link_colour']. '" />';
+								echo '<input type="text" name="button_1_link_colour_field" id="cli-colour-link-button-1" value="' .$the_options['button_1_link_colour']. '" class="my-color-field" />';
 								?>
 							</td>
 						</tr>
@@ -354,7 +391,7 @@ function cookielawinfo_print_admin_page() {
 							<th scope="row"><label for="button_1_button_colour_field">Button colour</label></th>
 							<td>
 								<?php
-								echo '<input type="text" name="button_1_button_colour_field" id="cli-colour-btn-button-1" value="' .$the_options['button_1_button_colour']. '" />';
+								echo '<input type="text" name="button_1_button_colour_field" id="cli-colour-btn-button-1" value="' .$the_options['button_1_button_colour']. '" class="my-color-field" />';
 								?>
 							</td>
 						</tr>
@@ -388,7 +425,7 @@ function cookielawinfo_print_admin_page() {
 							<th scope="row"><label for="button_2_link_colour_field">Link colour</label></th>
 							<td>
 								<?php
-								echo '<input type="text" name="button_2_link_colour_field" id="cli-colour-link-button-1" value="' .$the_options['button_2_link_colour']. '" />';
+								echo '<input type="text" name="button_2_link_colour_field" id="cli-colour-link-button-1" value="' .$the_options['button_2_link_colour']. '" class="my-color-field" />';
 								?>
 							</td>
 						</tr>
@@ -412,7 +449,7 @@ function cookielawinfo_print_admin_page() {
 							<th scope="row"><label for="button_2_button_colour_field">Button colour</label></th>
 							<td>
 								<?php
-								echo '<input type="text" name="button_2_button_colour_field" id="cli-colour-btn-button-1" value="' .$the_options['button_2_button_colour']. '" />';
+								echo '<input type="text" name="button_2_button_colour_field" id="cli-colour-btn-button-1" value="' .$the_options['button_2_button_colour']. '" class="my-color-field" />';
 								?>
 							</td>
 						</tr>
@@ -426,10 +463,10 @@ function cookielawinfo_print_admin_page() {
 						</tr>
 					</table><!-- end custom button -->
 					
-				</div>
+				</dd>
 				
-				<h3><a href="#">Using the Shortcodes</a></h3>
-				<div class="cli-help">
+				<dt><a href="#">Using the Shortcodes</a></dt>
+				<dd class="cli-help">
 					<h4>Cookie bar shortcodes</h4>
 					<p>You can enter the shortcodes in the "message" field of the Cookie Law Info bar. They add nicely formatted buttons and/or links into the cookie bar, without you having to add any HTML.</p>
 					<p>The shortcodes are:</p>
@@ -447,16 +484,19 @@ function cookielawinfo_print_admin_page() {
 					
 					<pre>[cookie_audit]</pre><span>This prints out a nice table of cookies, in line with the guidance given by the ICO. <em>You need to enter the cookies your website uses via the Cookie Law Info menu in your WordPress dashboard.</em></span>
 					
-					<pre>[cookie_delete]</pre><span>This shortcode will display a normal HTML link which when clicked, will delete the cookie set by Cookie Law Info (this cookie is used to remember that the cookie bar is closed).</span>
+					<pre>[delete_cookies]</pre><span>This shortcode will display a normal HTML link which when clicked, will delete the cookie set by Cookie Law Info (this cookie is used to remember that the cookie bar is closed).</span>
+					<pre>[delete_cookies text="Click here to delete"]</pre><span>Add any text you like- useful if you want e.g. another language to English.</span>
 					
-				</div>
+					
+				</dd>
 				
 				
-				<h3><a href="#">Advanced</a></h3>
-				<div>
+				<dt><a href="#">Advanced</a></dt>
+				<dd>
 					<p>Sometimes themes apply settings that clash with plugins. If that happens, try adjusting these settings.</p>
 					
 					<table class="form-table">
+						<!--
 						<tr valign="top">
 							<th scope="row"><label for="use_colour_picker_field">Use colour picker on this page?</label></th>
 							<td>
@@ -465,6 +505,7 @@ function cookielawinfo_print_admin_page() {
 								<span class="cli-plugin-example"><em>You will need to refresh your browser once the page re-loads in order to show the colour pickers.</em></span>
 							</td>
 						</tr>
+						-->
 						<tr valign="top">
 							<th scope="row">Reset all values</th>
 							<td>
@@ -483,9 +524,9 @@ function cookielawinfo_print_admin_page() {
 						-->
 					</table>
 					
-				</div>
+				</dd>
 				
-			</div><!-- end of cookielawinfo-accordion -->
+			</dl><!-- end of cookielawinfo-accordion -->
 			
 			
 			<!-- Second save button -->
@@ -554,6 +595,22 @@ function cookielawinfo_print_admin_page() {
 		</div><!-- end of cli-plugin-right-col (38%) -->
 	
 	</div><!-- end of cli-plugin-container -->
+	
+	
+	<script type="text/javascript">
+		(function($) {
+	
+		  var allPanels = $('.accordion > dd').hide();
+		  $('#accordion_default').show();
+	
+		  $('.accordion > dt > a').click(function() {
+			allPanels.slideUp();
+			$(this).parent().next().slideDown();
+			return false;
+		  });
+
+		})(jQuery);
+	</script>
 	
 	
 	<?php

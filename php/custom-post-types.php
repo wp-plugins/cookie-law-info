@@ -42,7 +42,25 @@ function cookielawinfo_register_custom_post_type() {
 		'show_ui'				=> true,
 		'query_var'				=> true,
 		'rewrite'				=> true,
+		
+		/** 27/05/2013 Editing out:
 		'capability_type'		=> 'post',
+		*/
+		
+		/** 27/05/2013 Adding in: */
+		'capabilities' => array(
+			'publish_posts' => 'manage_options',
+			'edit_posts' => 'manage_options',
+			'edit_others_posts' => 'manage_options',
+			'delete_posts' => 'manage_options',
+			'delete_others_posts' => 'manage_options',
+			'read_private_posts' => 'manage_options',
+			'edit_post' => 'manage_options',
+			'delete_post' => 'manage_options',
+			'read_post' => 'manage_options',
+		),
+		/** done editing */
+		
 		'hierarchical'			=> false,
 		'menu_position'			=> null,
 		'supports'				=> array( 'title','editor' )
