@@ -88,11 +88,12 @@ add_action( 'admin_enqueue_scripts', 'cookielawinfo_custom_dashboard_styles' );
 /** RICHARDASHBY EDIT */
 // WP3.5 colour picker:
 // http://make.wordpress.org/core/2012/11/30/new-color-picker-in-wp-3-5/
-add_action( 'admin_enqueue_scripts', 'mw_enqueue_color_picker' );
-function mw_enqueue_color_picker( $hook_suffix ) {
-    // first check that $hook_suffix is appropriate for your admin page
+add_action( 'admin_enqueue_scripts', 'cookielawinfo_enqueue_color_picker' );
+function cookielawinfo_enqueue_color_picker( $hook ) {
+    if ( 'cookielawinfo_page_cookie-law-info' != $hook )
+        return;
     wp_enqueue_style( 'wp-color-picker' );
-    wp_enqueue_script( 'my-script-handle', plugins_url('admin/cli-admin.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
+    wp_enqueue_script( 'cookielawinfo_admin_page_script', plugins_url('admin/cli-admin.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
 }
 
 

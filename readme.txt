@@ -4,7 +4,7 @@ Donate link: http://mobro.co/richashby
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 3.5.1
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -201,3 +201,6 @@ The more information you give, the quicker I can respond.
 
 = 1.1 =
 Major upgrade with several new features including auto-hide cookie bar after (configurable) delay, responsive design plus some bug fixes and performance enhancements.
+
+= 1.1.2 =
+Bugfix: namespaced function to cookielawinfo_enqueue_color_picker()
