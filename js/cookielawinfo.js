@@ -1,15 +1,60 @@
-function cli_show_cookiebar( html, json_payload ) {
-	var ACCEPT_COOKIE_NAME = 'viewed_cookie_policy';
-	var ACCEPT_COOKIE_EXPIRE = 365;
-	var settings = eval('(' + json_payload +')');
+function cli_show_cookiebar(p) {
 	
+	var Cookie = {
+		set: function(name,value,days) {
+			if (days) {
+				var date = new Date();
+				date.setTime(date.getTime()+(days*24*60*60*1000));
+				var expires = "; expires="+date.toGMTString();
+			}
+			else var expires = "";
+			document.cookie = name+"="+value+expires+"; path=/";
+		},
+		read: function(name) {
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0;i < ca.length;i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') {
+					c = c.substring(1,c.length);
+				}
+				if (c.indexOf(nameEQ) === 0) {
+					return c.substring(nameEQ.length,c.length);
+				}
+			}
+			return null;
+		},
+		erase: function(name) {
+			this.set(name,"",-1);
+		},
+		exists: function(name) {
+			return (this.read(name) !== null);
+		}
+	};
+	
+	var ACCEPT_COOKIE_NAME = 'viewed_cookie_policy',
+		ACCEPT_COOKIE_EXPIRE = 365,
+		html = p.html,
+		json_payload = p.settings;
+	
+	// Edit 09/05:
+	// Replaced eval with JSON.parse. See http://caniuse.com/json for support (sorry IE7 users but you're dinosaurs these days...)
+	//var settings = eval('(' + json_payload +')');
+	
+	if (typeof JSON.parse !== "function") {
+		console.log("CookieLawInfo requires JSON.parse but your browser doesn't support it");
+		return;
+	}
+	var settings = JSON.parse(json_payload);
 	jQuery('body').prepend(html);
-	var cached_header = jQuery(settings.notify_div_id);
-	var cached_showagain_tab = jQuery(settings.showagain_div_id);
-	var btn_accept = jQuery('#cookie_hdr_accept');
-	var btn_decline = jQuery('#cookie_hdr_decline');
-	var btn_moreinfo = jQuery('#cookie_hdr_moreinfo');
-	var btn_settings = jQuery('#cookie_hdr_settings');
+	
+	
+	var cached_header = jQuery(settings.notify_div_id),
+		cached_showagain_tab = jQuery(settings.showagain_div_id),
+		btn_accept = jQuery('#cookie_hdr_accept'),
+		btn_decline = jQuery('#cookie_hdr_decline'),
+		btn_moreinfo = jQuery('#cookie_hdr_moreinfo'),
+		btn_settings = jQuery('#cookie_hdr_settings');
 	
 	cached_header.hide();
 	if ( !settings.showagain_tab ) {
@@ -55,7 +100,7 @@ function cli_show_cookiebar( html, json_payload ) {
 	cached_header.css( hdr_args );
 	cached_showagain_tab.css( showagain_args );
 	
-	if (jQuery.cookie(ACCEPT_COOKIE_NAME) == null) {
+	if (!Cookie.exists(ACCEPT_COOKIE_NAME)) {
 		displayHeader();
 	}
 	else {
@@ -67,7 +112,7 @@ function cli_show_cookiebar( html, json_payload ) {
 		setTimeout(close_header, settings.show_once);
 	}
 	function close_header() {
-		jQuery.cookie(ACCEPT_COOKIE_NAME, 'yes', { expires: ACCEPT_COOKIE_EXPIRE, path: '/' });
+		Cookie.set(ACCEPT_COOKIE_NAME, 'yes', ACCEPT_COOKIE_EXPIRE);
 		hideHeader();
 	}
 	
@@ -108,21 +153,21 @@ function cli_show_cookiebar( html, json_payload ) {
 	// Action event listener to capture delete cookies shortcode click. This simply deletes the viewed_cookie_policy cookie. To use:
 	// <a href='#' id='cookielawinfo-cookie-delete' class='cookie_hdr_btn'>Delete Cookies</a>
 	jQuery("#cookielawinfo-cookie-delete").click(function() {
-		jQuery.cookie(ACCEPT_COOKIE_NAME, null, { expires: 365, path: '/' });
+		Cookie.erase(ACCEPT_COOKIE_NAME);
 		return false;
 	});
 	
 	// Action event listener for debug cookies value link. To use:
 	// <a href='#' id='cookielawinfo-debug-cookie'>Show Cookie Value</a>
 	jQuery("#cookielawinfo-debug-cookie").click(function() {
-		alert("Cookie value: " + jQuery.cookie(ACCEPT_COOKIE_NAME));
+		alert("Cookie value: " + Cookie.read(ACCEPT_COOKIE_NAME));
 		return false;
 	});
 	
 	// action event listeners to capture "accept/continue" events:
 	jQuery("#cookie_action_close_header").click(function() {
 		// Set cookie then hide header:
-		jQuery.cookie(ACCEPT_COOKIE_NAME, 'yes', { expires: ACCEPT_COOKIE_EXPIRE, path: '/' });
+		Cookie.set(ACCEPT_COOKIE_NAME, 'yes', ACCEPT_COOKIE_EXPIRE);
 		
 		if (settings.notify_animate_hide) {
 			cached_header.slideUp(settings.animate_speed_hide);
@@ -152,6 +197,5 @@ function cli_show_cookiebar( html, json_payload ) {
 		}
 		cached_header.slideUp(settings.animate_speed_show);
 	}
-	
 };
 function l1hs(str){if(str.charAt(0)=="#"){str=str.substring(1,str.length);}else{return "#"+str;}return l1hs(str);}

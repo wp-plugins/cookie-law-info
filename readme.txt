@@ -3,8 +3,8 @@ Contributors: richardashby
 Donate link: http://mobro.co/richashby
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
-Tested up to: 3.5.1
-Stable tag: 1.1.2
+Tested up to: 3.9.1
+Stable tag: 1.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -165,8 +165,27 @@ The more information you give, the quicker I can respond.
 
 == Changelog ==
 
-= 0.8.3 =
-* First public release.
+= 1.2 =
+* Removed 3rd party JavaScript "jQuery.cookie" which can cause issues with certain versions of Apache server
+* Added native JavaScript cookie getter/setter
+* Removed JavaScript debug routine
+* Replaced JavaScript 'eval' with JSON.parse() for improved security: requires IE8+ (all other browsers fine though- who would have thought?)
+* Improved JavaScript performance and compatibility by removing global variables and running as inline function
+
+= 1.1 =
+* New feature: auto-hide cookie bar after (configurable) delay
+* New feature: added responsive design to cookie audit table (thanks to Mark Wiltshire)
+* Upgrade: now using WP3.5 color picker
+* Bug fix: Cookie Audit table now shows maximum of 50 posts (was 10, which was a bit restrictive)
+* Bug fix: Cookie Law Info now only visible to admins
+* Bug fix: fixed typo on Dashboard help section for the [delete_cookies] shortcode
+* Bug fix: fixed "invalid header" bug
+* Performance enhancement: removed jQueryUI from admin panel and added custom (slimline) code
+* Performance enhancement: compressed CSS a bit
+* Performance enhancement: cookie audit CSS is now only downloaded on the page on which it is needed
+
+= 1.0.3 =
+* Fixed bug where JavaScript generated an http 404 error.
 
 = 0.9 =
 * Improved design & appearance
@@ -182,25 +201,16 @@ The more information you give, the quicker I can respond.
 * Refactored codebase, improved jQuery performance
 * Bugs fixed: no more slashes in Message Box
 
-= 1.0.3 =
-* Fixed bug where JavaScript generated an http 404 error.
-
-= 1.1 =
-* New feature: auto-hide cookie bar after (configurable) delay
-* New feature: added responsive design to cookie audit table (thanks to Mark Wiltshire)
-* Upgrade: now using WP3.5 color picker
-* Bug fix: Cookie Audit table now shows maximum of 50 posts (was 10, which was a bit restrictive)
-* Bug fix: Cookie Law Info now only visible to admins
-* Bug fix: fixed typo on Dashboard help section for the [delete_cookies] shortcode
-* Bug fix: fixed "invalid header" bug
-* Performance enhancement: removed jQueryUI from admin panel and added custom (slimline) code
-* Performance enhancement: compressed CSS a bit
-* Performance enhancement: cookie audit CSS is now only downloaded on the page on which it is needed
+= 0.8.3 =
+* First public release.
 
 == Upgrade Notice ==
 
-= 1.1 =
-Major upgrade with several new features including auto-hide cookie bar after (configurable) delay, responsive design plus some bug fixes and performance enhancements.
+= 1.2 =
+Performance and compatibility upgrade
 
 = 1.1.2 =
 Bugfix: namespaced function to cookielawinfo_enqueue_color_picker()
+
+= 1.1 =
+Major upgrade with several new features including auto-hide cookie bar after (configurable) delay, responsive design plus some bug fixes and performance enhancements.

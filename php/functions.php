@@ -104,21 +104,13 @@ function cookielawinfo_inject_cli_script() {
 		<script type="text/javascript">
 			//<![CDATA[
 			jQuery(document).ready(function() {
-				var a = '<?php echo $notify_html; ?>';
-				var b = '<?php echo cookielawinfo_get_json_settings(); ?>';
-				cli_show_cookiebar(a,b);
 				
-				<?php
-					// Note to developers:
-					// Here's a debug routine that you can use in case the cookie bar is giving you trouble.
-					// Switch CLI_PLUGIN_DEVELOPMENT_MODE to true then call as e.g. http://www.yourwebsite.com/?cli-debug=all
-					// Options: all | html | json
-					if ( CLI_PLUGIN_DEVELOPMENT_MODE ) {
-						?>
-						function getURLParameter(name){return decodeURI((RegExp(name+'='+'(.+?)(&|$)').exec(location.search)||[,null])[1]);}var p=eval('('+b+')');var t='';for(prop in p){if (!p.hasOwnProperty(prop)){continue;}t+=prop+" = "+p[prop]+"\n";}switch(getURLParameter("cli-debug")){case "json":alert(t);break;case "html":alert(a);break;case "all":alert(t);alert(a);break;default:}
-						<?php
-					}
-				?>
+				// Edit 09/05: remove globals and package into Object Literal, and removed the debug function
+				cli_show_cookiebar({
+					html: '<?php echo $notify_html; ?>',
+					settings: '<?php echo cookielawinfo_get_json_settings(); ?>'
+				});
+				
 			});
 			//]]>
 		</script>
@@ -138,7 +130,9 @@ function cookielawinfo_inject_cli_script() {
 function cookielawinfo_enqueue_frontend_scripts() {
 	$the_options = cookielawinfo_get_admin_settings();
 	if ( $the_options['is_on'] == true ) {
-		wp_enqueue_script( 'jquery-cookie', CLI_PLUGIN_URL . 'js/jquery.cookie.js', array('jquery') );
+		
+		// Edit 09/05: remove jQuery cookie dependency
+		//wp_enqueue_script( 'jquery-cookie', CLI_PLUGIN_URL . 'js/jquery.cookie.js', array('jquery') );
 		
 		wp_register_style( 'cookielawinfo-style', CLI_PLUGIN_URL . 'css/cli-style.css' );
 		wp_enqueue_style( 'cookielawinfo-style' );

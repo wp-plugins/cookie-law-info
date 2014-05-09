@@ -5,24 +5,9 @@ Plugin URI: http://wordpress.org/extend/plugins/cookie-law-info/description/
 Description: A simple way of 'implied consent' to show your website complies with the EU Cookie Law, which came into force on 26 May 2012.
 Author: Richard Ashby
 Author URI: http://www.cookielawinfo.com/
-Version: 1.1.2
+Version: 1.2
 License: GPL2
 	
-	===============================================================================
-	
-	Whilst writing this plugin, somebody very close to me passed away from
-	prostate cancer.
-	
-	If you found this software useful, please consider making a donation to
-	cancer research. Your donation, no matter how small, makes a real difference.
-	
-	Thank You.
-	
-	http://uk.movember.com/mospace/1853714/
-	www.cancerresearchuk.org
-
-	===============================================================================
-
 	Copyright 2012  Richard Ashby  (email : richard.ashby@mediacreek.com)
 
     This program is free software; you can redistribute it and/or modify
