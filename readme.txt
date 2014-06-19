@@ -4,7 +4,7 @@ Donate link: http://mobro.co/richashby
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 3.9.1
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -164,6 +164,10 @@ The more information you give, the quicker I can respond.
 4. Header (with custom styles)
 
 == Changelog ==
+
+= 1.2.1 =
+* Added plugin settings page link to plugins.php
+* Bug fix: custom posts bug affecting some other plugins
 
 = 1.2 =
 * Removed 3rd party JavaScript "jQuery.cookie" which can cause issues with certain versions of Apache server

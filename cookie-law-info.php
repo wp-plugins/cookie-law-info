@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/cookie-law-info/description/
 Description: A simple way of 'implied consent' to show your website complies with the EU Cookie Law, which came into force on 26 May 2012.
 Author: Richard Ashby
 Author URI: http://www.cookielawinfo.com/
-Version: 1.2
+Version: 1.2.1
 License: GPL2
 */
 
@@ -90,6 +90,15 @@ add_action( 'init', 'cookielawinfo_register_custom_post_type' );
 add_action( 'save_post', 'cookielawinfo_save_custom_metaboxes' );
 add_filter( 'manage_edit-cookielawinfo_columns', 'cookielawinfo_edit_columns' );
 add_action( 'manage_posts_custom_column',  'cookielawinfo_custom_columns' );
+
+
+// 12/05 edit
+// Add plugin settings / more plugins link to the WordPress dashboard 'plugins' page:
+add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'cookielawinfo_plugin_action_links' );
+function cookielawinfo_plugin_action_links( $links ) {
+   $links[] = '<a href="'. get_admin_url(null, 'edit.php?post_type=cookielawinfo&page=cookie-law-info') .'">Settings</a>';
+   return $links;
+}
 
 
 /** Register the uninstall function */
