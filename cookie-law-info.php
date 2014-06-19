@@ -7,7 +7,9 @@ Author: Richard Ashby
 Author URI: http://www.cookielawinfo.com/
 Version: 1.2
 License: GPL2
-	
+*/
+
+/*	
 	Copyright 2012  Richard Ashby  (email : richard.ashby@mediacreek.com)
 
     This program is free software; you can redistribute it and/or modify
@@ -22,7 +24,6 @@ License: GPL2
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
 */
 
 
