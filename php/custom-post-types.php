@@ -66,35 +66,6 @@ function cookielawinfo_register_custom_post_type() {
 		'supports'				=> array( 'title','editor' )
 	); 
 	register_post_type( 'cookielawinfo' , $args );
-	
-	// Migrate custom meta:
-	cookielawinfo_migrate_custom_meta();
-}
-
-
-/** Updates custom meta to fix bug in version 1.0.1 */
-function cookielawinfo_migrate_custom_meta() {
-	global $post;
-	$args = array('post_type' => 'cookielawinfo');
-	$cookies = new WP_Query( $args );
-	
-	if ( !$cookies->have_posts() ) {
-		return;
-	}
-	
-	while ( $cookies->have_posts() ) : $cookies->the_post();
-		// Get custom fields:
-		$custom = get_post_custom( $post->ID );
-		// Look for old values. If they exist, move them to new values then delete old values:
-		if ( isset ( $custom["cookie_type"][0] ) ) {
-			update_post_meta( $post->ID, "_cli_cookie_type", sanitize_text_field( $custom["cookie_type"][0] ) );
-			delete_post_meta( $post->ID, "cookie_type", $custom["cookie_type"][0] );
-		}
-		if ( isset ( $custom["cookie_duration"][0] ) ) {
-			update_post_meta( $post->ID, "_cli_cookie_duration", sanitize_text_field( $custom["cookie_duration"][0] ) );
-			delete_post_meta( $post->ID, "cookie_duration", $custom["cookie_duration"][0] );
-		}
-	endwhile;
 }
 
 
