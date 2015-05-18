@@ -37,10 +37,6 @@ function cli_show_cookiebar(p) {
 		html = p.html,
 		json_payload = p.settings;
 	
-	// Edit 09/05:
-	// Replaced eval with JSON.parse. See http://caniuse.com/json for support (sorry IE7 users but you're dinosaurs these days...)
-	//var settings = eval('(' + json_payload +')');
-	
 	if (typeof JSON.parse !== "function") {
 		console.log("CookieLawInfo requires JSON.parse but your browser doesn't support it");
 		return;
