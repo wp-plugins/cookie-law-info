@@ -2,7 +2,7 @@
 /*
 	===============================================================================
 
-	Copyright 2012  Richard Ashby  (email : richard.ashby@mediacreek.com)
+	Copyright 2012  Richard Ashby  (email : wordpress@mediacreek.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -566,17 +566,22 @@ function cookielawinfo_print_admin_page() {
 					<p>If you want to go back to the previous version you can always download it again from <a href="http://www.cookielawinfo.com">CookieLawInfo.com.</a></p>
 				</div>
 				
+				<h3>Coming Soon: Cookie Law Info 2.0</h3>
+				<p>It's time for a completely new version! Cookie Law Info will always be free but there will also be a PRO version for those who want a bit more. You can <a href="http://cookielawinfo.com/cookie-law-info-2-0/">read about it here</a>. For both versions, you can sign up to the BETA version and be the first to try it out. It's completely free of charge and you could even win a free PRO version!</p>
+				<br />
+
 				<h3>Help</h3>
 				<ul>
-					<li><a href="http://www.cookielawinfo.com/wordpress-plugin/">Plugin Homepage</a></li>
-					<li><a href="http://wordpress.org/support/plugin/cookie-law-info/">Plugin Support</a></li>
+					<li><a href="http://cookielawinfo.com/wordpress-plugin/">Plugin Homepage</a></li>
+					<li><a href="http://cookielawinfo.com/support/">Help and Support</a></li>
 					<li><a href="http://wordpress.org/support/plugin/cookie-law-info/">Report a Bug</a></li>
-					<li><a href="http://www.cookielawinfo.com/contact/">Suggest a Feature</a></li>
-					<li><a href="http://www.cookielawinfo.com">About the law</a></li>
+					<li><a href="http://cookielawinfo.com/contact/">Suggest a Feature</a></li>
+					<li><a href="http://cookielawinfo.com">About the law</a></li>
 				</ul>
-				
 				<br />
-				<br />
+
+				<h3>Like this plugin?</h3>
+				<p>If you find this plugin useful please show your support and rate it <a href="http://wordpress.org/support/view/plugin-reviews/cookie-law-info?filter=5" target="_blank">★★★★★</a> on <a href="http://wordpress.org/support/view/plugin-reviews/cookie-law-info?filter=5" target="_blank">WordPress.org</a> - much appreciated! :)</p>
 				<br />
 				
 				<div>

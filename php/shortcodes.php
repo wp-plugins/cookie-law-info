@@ -2,7 +2,7 @@
 /*
 	===============================================================================
 
-	Copyright 2012  Richard Ashby  (email : richard.ashby@mediacreek.com)
+	Copyright 2012  Richard Ashby  (email : wordpress@mediacreek.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -114,7 +114,15 @@ function cookielawinfo_shortcode_accept_button( $atts ) {
 	extract( shortcode_atts( array(
 		'colour' => 'green'
 	), $atts ) );
-	return '<a href="#" id="cookie_action_close_header" class="medium cli-plugin-button ' . $colour . '">Accept</a>';
+
+	// Fixing button translate text bug
+	// 18/05/2015 by RA
+	$defaults = array(
+		'button_1_text' => 'Accept'
+	);
+	$settings = wp_parse_args( cookielawinfo_get_admin_settings(), $defaults );
+
+	return '<a href="#" id="cookie_action_close_header" class="medium cli-plugin-button ' . $colour . '">' . $settings['button_1_text'] . '</a>';
 }
 
 

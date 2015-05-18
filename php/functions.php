@@ -1,6 +1,6 @@
 <?php
 /*
-Copyright 2012  Richard Ashby  (email : richard.ashby@mediacreek.com)
+Copyright 2012  Richard Ashby  (email : wordpress@mediacreek.com)
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License, version 2, as 
