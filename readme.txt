@@ -140,6 +140,9 @@ See http://cookielawinfo.com for more information on what is required.
 
 == Changelog ==
 
+= 1.3 =
+* Adding WPML support (wpml.xml)
+
 = 1.2.2 =
 * Bug fix: removed extra '{' from cli-tables.css
 * Bug fix: fixed cookie_button shortcode text bug
