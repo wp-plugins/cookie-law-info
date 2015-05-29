@@ -4,7 +4,7 @@ Donate link: http://cookielawinfo.com/donate
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 4.2.2
-Stable tag: 1.2.2
+Stable tag: 1.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,6 +24,9 @@ You can choose to make the cookie bar disappear after a few seconds (completely 
 It also has a Cookie Audit module so you can easily show what cookies your site uses and display them neatly in a table on your Privacy & Cookies Policy page.
 
 
+This plugin supports WPML and qTranslate so your translation needs are covered.
+
+
 Inline with official ICO guidelines and current industry best practice, this plugin uses 'implied consent' to aid you in showing your compliance status. This is a deliberate design choice that does not proactively block cookies: it doesn't make your visitors take action before they can use your website, and will not interfere with blog comments and [Google] Analytics. This approach is aimed at reducing website visitor dropout and maintaining your vital analytics data.
 
 For a demo, [check out the EU Cookie Law website](http://cookielawinfo.com/ "Demo the EU Cookie Law plugin"), including the table of cookies on the Privacy Policy page.
@@ -37,7 +40,8 @@ Features:
 * (Optional) cookie bar can be permanently dismissed or accessible through a "show again" tab
 * (Optional) "show again" tab is fully customisable including position shown on page and styles
 * "Cookie Audit" shortcode to construct a nicely-styled 'Privacy & Cookie Policy'
-
+* WPML compatible
+* qTranslate support
 
 [Read more about the EU Cookie Law](http://cookielawinfo.com/ "More information about the EU Cookie Law")
 
