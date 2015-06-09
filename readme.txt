@@ -4,7 +4,7 @@ Donate link: http://cookielawinfo.com/donate
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 4.2.2
-Stable tag: 1.3.2
+Stable tag: 1.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ This plugin uses implied consent, adding a subtle banner to your website either 
 You can fully customise the style so it fits in with your existing website- change the colours, fonts, styles, the position on the page and even how it behaves when you click "accept".
 
 
-You can choose to make the cookie bar disappear after a few seconds (completely configurable).
+You can choose to make the cookie bar disappear after a few seconds (completely configurable) or to accept on scroll (an option available under Italian law).
 
 
 It also has a Cookie Audit module so you can easily show what cookies your site uses and display them neatly in a table on your Privacy & Cookies Policy page.
@@ -36,6 +36,7 @@ Features:
 
 * Fully customisable to look just like your own website's style: customise the colours, styles and fonts
 * Put the cookie bar in either the header or the footer
+* (Optional) accept cookie policy if the user scrolls
 * (Optional) automatically close the cookie bar after a delay (delay is configurable)
 * (Optional) cookie bar can be permanently dismissed or accessible through a "show again" tab
 * (Optional) "show again" tab is fully customisable including position shown on page and styles
@@ -139,6 +140,10 @@ See http://cookielawinfo.com for more information on what is required.
 4. Header (with custom styles)
 
 == Changelog ==
+
+= 1.4 =
+* New feature: accept policy & close cookie bar on scroll (an option available under Italian law)
+* New feature: if cookie bar is set to header it is fixed to the top of the screen (using CSS "position:fixed")
 
 = 1.3.2 =
 * Bug fix: changed filename from wpml.xml to wpml-config.xml
