@@ -100,3 +100,6 @@
 .cli-plugin-container div.pad-10, .cli-plugin-left-col div.pad-10, .cli-plugin-right-col div.pad-10 { padding: 10px; }
 .width-60 { width: 60%; }
 .width-100 { width: 100%; }
+
+.hr-top { border-top: 1px solid #ccc; }
+.hr-bottom { border-bottom: 1px solid #ccc; }

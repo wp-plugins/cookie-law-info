@@ -50,6 +50,8 @@ function cookielawinfo_get_json_settings() {
 		'notify_div_id'					=> $settings['notify_div_id'],
 		'notify_position_horizontal'	=> $settings['notify_position_horizontal'],
 		'notify_position_vertical'		=> $settings['notify_position_vertical'],
+		'scroll_close'                  => $settings['scroll_close'],
+		'scroll_close_reload'           => $settings['scroll_close_reload'],
 		'showagain_tab'					=> $settings['showagain_tab'],
 		'showagain_background'			=> $settings['showagain_background'],
 		'showagain_border'				=> $settings['showagain_border'],
