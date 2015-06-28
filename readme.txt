@@ -4,7 +4,7 @@ Donate link: http://cookielawinfo.com/donate
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 4.2.2
-Stable tag: 1.4
+Stable tag: 1.4.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,9 @@ See http://cookielawinfo.com for more information on what is required.
 4. Header (with custom styles)
 
 == Changelog ==
+
+= 1.4.1 =
+* Bug fix: fixed browser compatibility issue in cookielawinfo.js
 
 = 1.4 =
 * New feature: accept policy & close cookie bar on scroll (an option available under Italian law)

@@ -188,7 +188,7 @@ function cli_show_cookiebar(p) {
 	function closeOnScroll() {
 		if (window.pageYOffset > 100 && !Cookie.read(ACCEPT_COOKIE_NAME)) {
 			accept_close();
-			if (settings.scroll_close_reload) {
+			if (settings.scroll_close_reload === true) {
 				location.reload();
 			}
 			window.removeEventListener("scroll", closeOnScroll, false);
