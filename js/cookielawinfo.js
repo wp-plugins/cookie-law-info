@@ -141,7 +141,8 @@ function cli_show_cookiebar(p) {
 	}
 	
 	// Action event listener for "show header" event:
-	cached_showagain_tab.click(function() {	
+	cached_showagain_tab.click(function(e) {	
+		e.preventDefault();
 		cached_showagain_tab.slideUp(settings.animate_speed_hide, function slideShow() {
 			cached_header.slideDown(settings.animate_speed_show);
 		});
@@ -154,15 +155,9 @@ function cli_show_cookiebar(p) {
 		return false;
 	});
 	
-	// Action event listener for debug cookies value link. To use:
-	// <a href='#' id='cookielawinfo-debug-cookie'>Show Cookie Value</a>
-	jQuery("#cookielawinfo-debug-cookie").click(function() {
-		alert("Cookie value: " + Cookie.read(ACCEPT_COOKIE_NAME));
-		return false;
-	});
-	
 	// action event listeners to capture "accept/continue" events:
-	jQuery("#cookie_action_close_header").click(function() {
+	jQuery("#cookie_action_close_header").click(function(e) {
+		e.preventDefault();
 		accept_close();
 	});
 
