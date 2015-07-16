@@ -1,5 +1,5 @@
 function cli_show_cookiebar(p) {
-	
+	/* plugin version 1.5 */
 	var Cookie = {
 		set: function(name,value,days) {
 			if (days) {
@@ -34,7 +34,6 @@ function cli_show_cookiebar(p) {
 	
 	var ACCEPT_COOKIE_NAME = 'viewed_cookie_policy',
 		ACCEPT_COOKIE_EXPIRE = 365,
-		html = p.html,
 		json_payload = p.settings;
 	
 	if (typeof JSON.parse !== "function") {
@@ -42,7 +41,6 @@ function cli_show_cookiebar(p) {
 		return;
 	}
 	var settings = JSON.parse(json_payload);
-	jQuery('body').prepend(html);
 	
 	
 	var cached_header = jQuery(settings.notify_div_id),
@@ -62,6 +60,15 @@ function cli_show_cookiebar(p) {
 		'color': settings.text,
 		'font-family': settings.font_family
 	};
+	if ( settings.notify_position_vertical == "top" ) {
+		if ( settings.header_fix === true ) {
+			hdr_args['position'] = 'fixed';
+		}
+		hdr_args['top'] = '0';
+	} else {
+		hdr_args['bottom'] = '0';
+	}
+	
 	var showagain_args = {
 		'background-color': settings.background,
 		'color': l1hs(settings.text),
@@ -76,7 +83,6 @@ function cli_show_cookiebar(p) {
 	if ( settings.notify_position_vertical == "top" ) {
 		if ( settings.border_on ) {
 			hdr_args['border-bottom'] = '4px solid ' + l1hs(settings.border);
-			hdr_args['position'] = 'fixed';
 		}
 		showagain_args.top = '0';
 	}
@@ -104,7 +110,6 @@ function cli_show_cookiebar(p) {
 		cached_header.hide();
 	}
 	
-	// Show once code:
 	if ( settings.show_once_yn ) {
 		setTimeout(close_header, settings.show_once);
 	}
@@ -140,7 +145,6 @@ function cli_show_cookiebar(p) {
 		});
 	}
 	
-	// Action event listener for "show header" event:
 	cached_showagain_tab.click(function(e) {	
 		e.preventDefault();
 		cached_showagain_tab.slideUp(settings.animate_speed_hide, function slideShow() {
@@ -148,21 +152,17 @@ function cli_show_cookiebar(p) {
 		});
 	});
 	
-	// Action event listener to capture delete cookies shortcode click. This simply deletes the viewed_cookie_policy cookie. To use:
-	// <a href='#' id='cookielawinfo-cookie-delete' class='cookie_hdr_btn'>Delete Cookies</a>
 	jQuery("#cookielawinfo-cookie-delete").click(function() {
 		Cookie.erase(ACCEPT_COOKIE_NAME);
 		return false;
 	});
 	
-	// action event listeners to capture "accept/continue" events:
 	jQuery("#cookie_action_close_header").click(function(e) {
 		e.preventDefault();
 		accept_close();
 	});
 
 	function accept_close() {
-		// Set cookie then hide header:
 		Cookie.set(ACCEPT_COOKIE_NAME, 'yes', ACCEPT_COOKIE_EXPIRE);
 		
 		if (settings.notify_animate_hide) {
@@ -175,11 +175,6 @@ function cli_show_cookiebar(p) {
 		return false;
 	}
 
-	/**
-	 * Soprattutto per gli italiani :)
-	 * If the visitor scrolls then under Italian law you have implied consent
-	 * Please note that this is not the law in other EU states, this is the Italian interpretation of the law
-	 */
 	function closeOnScroll() {
 		if (window.pageYOffset > 100 && !Cookie.read(ACCEPT_COOKIE_NAME)) {
 			accept_close();

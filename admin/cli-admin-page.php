@@ -177,6 +177,18 @@ function cookielawinfo_print_admin_page() {
 								</select>
 							</td>
 						</tr>
+
+						<!-- header_fix code here -->
+						<tr valign="top">
+							<th scope="row"><label for="header_fix_field">Fix Cookie Bar to Header?</label></th>
+							<td>
+								<input type="radio" id="header_fix_field_yes" name="header_fix_field" class="styled" value="true" <?php echo ( $the_options['header_fix'] == true ) ? ' checked="checked" />' : ' />'; ?> Yes
+								<input type="radio" id="iheader_fix_field_no" name="header_fix_field" class="styled" value="false" <?php echo ( $the_options['header_fix'] == false ) ? ' checked="checked" />' : ' />'; ?> No
+								<span class="cli-plugin-example">If you select "Header" then you can optionally stick the cookie bar to the header. Will not have any effect if you select "Footer".</span>
+							</td>
+						</tr>
+						<!-- /header_fix -->
+
 						<tr valign="top">
 							<th scope="row"><label for="notify_animate_show_field">On load</label></th>
 							<td>
