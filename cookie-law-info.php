@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/plugins/cookie-law-info/description/
 Description: A simple way of 'implied consent' to show your website complies with the EU Cookie Law, which came into force on 26 May 2012.
 Author: Richard Ashby
 Author URI: http://cookielawinfo.com/
-Version: 1.4.3
+Version: 1.5
 License: GPL2
 */
 
@@ -64,16 +64,6 @@ add_shortcode( 'cookie_button', 'cookielawinfo_shortcode_main_button' );		// a s
 
 // Dashboard styles:
 add_action( 'admin_enqueue_scripts', 'cookielawinfo_custom_dashboard_styles' );
-
-
-/** RICHARDASHBY EDIT */
-//add_action( 'admin_footer', 'cookielawinfo_custom_dashboard_styles_my_colours' );
-
-
-
-/** RICHARDASHBY EDIT */
-// WP3.5 colour picker:
-// http://make.wordpress.org/core/2012/11/30/new-color-picker-in-wp-3-5/
 add_action( 'admin_enqueue_scripts', 'cookielawinfo_enqueue_color_picker' );
 function cookielawinfo_enqueue_color_picker( $hook ) {
     if ( 'cookielawinfo_page_cookie-law-info' != $hook )
@@ -81,7 +71,6 @@ function cookielawinfo_enqueue_color_picker( $hook ) {
     wp_enqueue_style( 'wp-color-picker' );
     wp_enqueue_script( 'cookielawinfo_admin_page_script', plugins_url('admin/cli-admin.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
 }
-
 
 
 // Cookie Audit custom post type functions:
@@ -92,8 +81,7 @@ add_filter( 'manage_edit-cookielawinfo_columns', 'cookielawinfo_edit_columns' );
 add_action( 'manage_posts_custom_column',  'cookielawinfo_custom_columns' );
 
 
-// 12/05 edit
-// Add plugin settings / more plugins link to the WordPress dashboard 'plugins' page:
+// Add plugin settings link:
 add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'cookielawinfo_plugin_action_links' );
 function cookielawinfo_plugin_action_links( $links ) {
    $links[] = '<a href="'. get_admin_url(null, 'edit.php?post_type=cookielawinfo&page=cookie-law-info') .'">Settings</a>';

@@ -45,6 +45,7 @@ function cookielawinfo_get_json_settings() {
 		'button_2_link_colour'			=> $settings['button_2_link_colour'],
 		'button_2_as_button'			=> $settings['button_2_as_button'],
 		'font_family'					=> $settings['font_family'],
+		'header_fix'                    => $settings['header_fix'],
 		'notify_animate_hide'			=> $settings['notify_animate_hide'],
 		'notify_animate_show'			=> $settings['notify_animate_show'],
 		'notify_div_id'					=> $settings['notify_div_id'],
@@ -82,37 +83,27 @@ function cookielawinfo_inject_cli_script() {
 	$the_options = cookielawinfo_get_admin_settings();
 		
 	if ( $the_options['is_on'] == true ) {
-		
-		// Process string for JavaScript
-		// REFACTOR / DEBUG:
-		// Consider using esc_js( $str ) instead of manually correcting (though is > WP v2.8 only, hence doing manually)
-		
-		// $str processes shortcodes:
-		$str = addslashes ( do_shortcode( stripslashes ( $the_options['notify_message'] ) ) );
-		
-		// Remove line breaks (breaks JavaScript if param is split over > 1 lines)
-		$line_breaks = array("\r\n", "\n", "\r");
-		$str = str_replace($line_breaks, '<br />', $str);
-		
-		// You can construct your own HTML and CSS here if needed.
+
+		// Output the HTML in the footer:
+		$str = do_shortcode( stripslashes ( $the_options['notify_message'] ) );
 		$notify_html = '<div id="' . cookielawinfo_remove_hash( $the_options["notify_div_id"] ) . '"><span>' . $str . '</span></div>';
 		
 		if ( $the_options['showagain_tab'] === true ) {
 			$notify_html .= '<div id="' . cookielawinfo_remove_hash( $the_options["showagain_div_id"] ) . '"><span id="cookie_hdr_showagain">' . $the_options["showagain_text"] . '</span></div>';
 		}
+
+		echo $notify_html;
+
+		// Now output the JavaScript:
 		
 		?>
 		
 		<script type="text/javascript">
 			//<![CDATA[
 			jQuery(document).ready(function() {
-				
-				// Edit 09/05: remove globals and package into Object Literal, and removed the debug function
 				cli_show_cookiebar({
-					html: '<?php echo $notify_html; ?>',
 					settings: '<?php echo cookielawinfo_get_json_settings(); ?>'
 				});
-				
 			});
 			//]]>
 		</script>
@@ -133,9 +124,6 @@ function cookielawinfo_enqueue_frontend_scripts() {
 	$the_options = cookielawinfo_get_admin_settings();
 	if ( $the_options['is_on'] == true ) {
 		
-		// Edit 09/05: remove jQuery cookie dependency
-		//wp_enqueue_script( 'jquery-cookie', CLI_PLUGIN_URL . 'js/jquery.cookie.js', array('jquery') );
-		
 		wp_register_style( 'cookielawinfo-style', CLI_PLUGIN_URL . 'css/cli-style.css' );
 		wp_enqueue_style( 'cookielawinfo-style' );
 		
@@ -143,12 +131,6 @@ function cookielawinfo_enqueue_frontend_scripts() {
 		wp_enqueue_script( 'cookie-law-info-script', CLI_PLUGIN_URL . 'js/cookielawinfo.js', array( 'jquery' ) );
 	}
 	wp_register_style( 'cookielawinfo-table-style', CLI_PLUGIN_URL . 'css/cli-tables.css' );
-	
-	/**
-	 * RICHARDASHBY EDIT: only enqueue on pages that need it
-	 * Previously this next line of code included CSS on every page, which is a waste of resources
-	 * Old >>> wp_enqueue_style( 'cookielawinfo-table-style' );
-	 */
 }
 
 
