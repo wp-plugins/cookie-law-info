@@ -1,5 +1,5 @@
 function cli_show_cookiebar(p) {
-	/* plugin version 1.5 */
+	/* plugin version 1.5.1 */
 	var Cookie = {
 		set: function(name,value,days) {
 			if (days) {
@@ -41,8 +41,7 @@ function cli_show_cookiebar(p) {
 		return;
 	}
 	var settings = JSON.parse(json_payload);
-	
-	
+
 	var cached_header = jQuery(settings.notify_div_id),
 		cached_showagain_tab = jQuery(settings.showagain_div_id),
 		btn_accept = jQuery('#cookie_hdr_accept'),
