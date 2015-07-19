@@ -159,7 +159,7 @@ function cookielawinfo_shortcode_main_button( $atts ) {
 	$url = ( $settings['button_1_action'] == "CONSTANT_OPEN_URL" ) ? $settings['button_1_url'] : "#";
 	
 	$link_tag = '<a href="' . $url . '" id="' . cookielawinfo_remove_hash ( $settings['button_1_action'] ) . '" ';
-	$link_tag .= ( $settings['button_1_new_win'] ) ? 'target="_new" ' : '' ;
+	$link_tag .= ( $settings['button_1_new_win'] ) ? 'target="_blank" ' : '' ;
 	$link_tag .= $class . ' >' . $settings['button_1_text'] . '</a>';
 	
 	return $link_tag;
@@ -213,7 +213,7 @@ function cookielawinfo_shortcode_button_DRY_code( $name ) {
 	$url = ( $settings['button_x_action'] == "CONSTANT_OPEN_URL" ) ? $settings['button_x_url'] : "#";
 	
 	$link_tag = '<a href="' . $url . '" id="' . cookielawinfo_remove_hash ( $settings['button_x_action'] ) . '" ';
-	$link_tag .= ( $settings['button_x_new_win'] ) ? 'target="_new" ' : '' ;
+	$link_tag .= ( $settings['button_x_new_win'] ) ? 'target="_blank" ' : '' ;
 	$link_tag .= $class . ' >' . $settings['button_x_text'] . '</a>';
 	
 	return $link_tag;

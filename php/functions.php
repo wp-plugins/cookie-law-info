@@ -128,7 +128,7 @@ function cookielawinfo_enqueue_frontend_scripts() {
 		wp_enqueue_style( 'cookielawinfo-style' );
 		
 		// 0.9:
-		wp_enqueue_script( 'cookie-law-info-script', CLI_PLUGIN_URL . 'js/cookielawinfo.js', array( 'jquery' ) );
+		wp_enqueue_script( 'cookie-law-info-script', CLI_PLUGIN_URL . 'js/cookielawinfo.js', array( 'jquery' ), '1.5.1' );
 	}
 	wp_register_style( 'cookielawinfo-table-style', CLI_PLUGIN_URL . 'css/cli-tables.css' );
 }
