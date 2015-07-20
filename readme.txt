@@ -4,7 +4,7 @@ Donate link: http://cookielawinfo.com/donate
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 4.2.2
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,6 +140,9 @@ See http://cookielawinfo.com for more information on what is required.
 4. Header (with custom styles)
 
 == Changelog ==
+
+= 1.5.2 =
+* Minor bug fix: adds version number to cli-admin.css
 
 = 1.5.1 =
 * Bug fix: HTML5 validation fix for shortcode links (thanks to davidebabylonia)

@@ -123,14 +123,18 @@ function cookielawinfo_inject_cli_script() {
 function cookielawinfo_enqueue_frontend_scripts() {
 	$the_options = cookielawinfo_get_admin_settings();
 	if ( $the_options['is_on'] == true ) {
+
+		/**
+		 * Force reload
+		 */
+		$version = '1.5.2';
 		
-		wp_register_style( 'cookielawinfo-style', CLI_PLUGIN_URL . 'css/cli-style.css' );
+		wp_register_style( 'cookielawinfo-style', CLI_PLUGIN_URL . 'css/cli-style.css', null, $version );
 		wp_enqueue_style( 'cookielawinfo-style' );
 		
-		// 0.9:
-		wp_enqueue_script( 'cookie-law-info-script', CLI_PLUGIN_URL . 'js/cookielawinfo.js', array( 'jquery' ), '1.5.1' );
+		wp_enqueue_script( 'cookie-law-info-script', CLI_PLUGIN_URL . 'js/cookielawinfo.js', array( 'jquery' ), $version );
 	}
-	wp_register_style( 'cookielawinfo-table-style', CLI_PLUGIN_URL . 'css/cli-tables.css' );
+	wp_register_style( 'cookielawinfo-table-style', CLI_PLUGIN_URL . 'css/cli-tables.css', null, $version );
 }
 
 
