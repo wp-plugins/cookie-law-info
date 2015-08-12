@@ -381,7 +381,7 @@ function cookielawinfo_print_admin_page() {
 						<tr valign="top">
 							<th scope="row"><label for="button_1_text_field">Link Text</label></th>
 							<td>
-								<input type="text" name="button_1_text_field" value="<?php echo $the_options['button_1_text'] ?>" />
+								<input type="text" name="button_1_text_field" value="<?php echo stripslashes( $the_options['button_1_text'] ) ?>" />
 							</td>
 						</tr>
 						<tr valign="top">
@@ -447,7 +447,7 @@ function cookielawinfo_print_admin_page() {
 						<tr valign="top">
 							<th scope="row"><label for="button_2_text_field">Link Text</label></th>
 							<td>
-								<input type="text" name="button_2_text_field" value="<?php echo $the_options['button_2_text'] ?>" />
+								<input type="text" name="button_2_text_field" value="<?php echo stripslashes( $the_options['button_2_text'] ) ?>" />
 							</td>
 						</tr>
 						<tr valign="top">

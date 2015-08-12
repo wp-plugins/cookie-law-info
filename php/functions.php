@@ -127,7 +127,7 @@ function cookielawinfo_enqueue_frontend_scripts() {
 		/**
 		 * Force reload
 		 */
-		$version = '1.5.2';
+		$version = '1.5.3';
 		
 		wp_register_style( 'cookielawinfo-style', CLI_PLUGIN_URL . 'css/cli-style.css', null, $version );
 		wp_enqueue_style( 'cookielawinfo-style' );

@@ -81,11 +81,11 @@ function cookielawinfo_table_shortcode( $atts ) {
 	);
 	$cookies = new WP_Query( $args );
 	
-	$ret = '<table class="cookielawinfo-' . $style . '"><thead>';
+	$ret = '<table class="cookielawinfo-' . $style . '"><thead><tr>';
 	$ret .= '<th class="cookielawinfo-column-1">Cookie</th>';
 	$ret .= '<th class="cookielawinfo-column-2">Type</th>';
 	$ret .= '<th class="cookielawinfo-column-3">Duration</th>';
-	$ret .= '<th class="cookielawinfo-column-4">Description</th>';
+	$ret .= '<th class="cookielawinfo-column-4">Description</th></tr>';
 	$ret .= '</thead><tbody>';
 	
 	if ( !$cookies->have_posts() ) {
@@ -122,7 +122,7 @@ function cookielawinfo_shortcode_accept_button( $atts ) {
 	);
 	$settings = wp_parse_args( cookielawinfo_get_admin_settings(), $defaults );
 
-	return '<a href="#" id="cookie_action_close_header" class="medium cli-plugin-button ' . $colour . '">' . $settings['button_1_text'] . '</a>';
+	return '<a href="#" id="cookie_action_close_header" class="medium cli-plugin-button ' . $colour . '">' . stripslashes( $settings['button_1_text'] ) . '</a>';
 }
 
 
@@ -160,7 +160,7 @@ function cookielawinfo_shortcode_main_button( $atts ) {
 	
 	$link_tag = '<a href="' . $url . '" id="' . cookielawinfo_remove_hash ( $settings['button_1_action'] ) . '" ';
 	$link_tag .= ( $settings['button_1_new_win'] ) ? 'target="_blank" ' : '' ;
-	$link_tag .= $class . ' >' . $settings['button_1_text'] . '</a>';
+	$link_tag .= $class . ' >' . stripslashes( $settings['button_1_text'] ) . '</a>';
 	
 	return $link_tag;
 }
@@ -174,7 +174,7 @@ function cookielawinfo_shortcode_button_DRY_code( $name ) {
 	
 	if ( $name == "button_1" ) {
 		$settings = array(
-			'button_x_text' => $arr['button_1_text'],
+			'button_x_text' => stripslashes( $arr['button_1_text'] ),
 			'button_x_url' => $arr['button_1_url'],
 			'button_x_action' => $arr['button_1_action'],
 			
@@ -188,7 +188,7 @@ function cookielawinfo_shortcode_button_DRY_code( $name ) {
 	}
 	elseif ( $name == "button_2" ) {
 		$settings = array(
-			'button_x_text' => $arr['button_2_text'],
+			'button_x_text' => stripslashes( $arr['button_2_text'] ),
 			'button_x_url' => $arr['button_2_url'],
 			'button_x_action' => $arr['button_2_action'],
 			
