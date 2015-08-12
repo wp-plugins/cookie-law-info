@@ -3,7 +3,7 @@ Contributors: richardashby
 Donate link: http://cookielawinfo.com/donate
 Tags: eu cookie law, cookie law, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
-Tested up to: 4.2.2
+Tested up to: 4.2.4
 Stable tag: 1.5.3
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
