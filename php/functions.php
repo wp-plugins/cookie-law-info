@@ -44,6 +44,7 @@ function cookielawinfo_get_json_settings() {
 		'button_2_button_hover'			=> (cookielawinfo_su_hex_shift( $settings['button_2_button_colour'], 'down', 20 )),
 		'button_2_link_colour'			=> $settings['button_2_link_colour'],
 		'button_2_as_button'			=> $settings['button_2_as_button'],
+		'cookie_domain'				=> $settings['cookie_domain'],
 		'font_family'					=> $settings['font_family'],
 		'header_fix'                    => $settings['header_fix'],
 		'notify_animate_hide'			=> $settings['notify_animate_hide'],
