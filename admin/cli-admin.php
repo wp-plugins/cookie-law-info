@@ -49,6 +49,7 @@ function cookielawinfo_get_default_settings() {
 		'button_2_as_button'			=> false,
 		'button_2_button_colour' 		=> '#333',
 		'button_2_button_size' 			=> 'medium',
+		'cookie_domain'					=> parse_url(get_site_url(), PHP_URL_HOST), 
 		'font_family' 					=> 'inherit', // Pick the family, not the easy name (see helper function below)
 		'header_fix'                    => false,
 		'is_on' 						=> true,

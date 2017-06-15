@@ -305,6 +305,17 @@ function cookielawinfo_print_admin_page() {
 								
 							</td>
 						</tr>
+
+						<tr valign="top">
+							<th scope="row"><label for="cookie_domain">Cookie Domain</label></th>
+							<td>
+								<input type="text" name="cookie_domain_field" value="<?php echo $the_options['cookie_domain'] ?>" />
+								<br/>
+								<small>You can restrict the cookie to a single sub-domain, domain etc.<br /> Ex: this-one.domain.com, or domain.com etc.
+								</small>
+							</td>
+						</tr>
+
 					</table>
 					
 				</dd>

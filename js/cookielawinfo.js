@@ -8,7 +8,14 @@ function cli_show_cookiebar(p) {
 				var expires = "; expires="+date.toGMTString();
 			}
 			else var expires = "";
-			document.cookie = name+"="+value+expires+"; path=/";
+
+			var cookie_domain = '';
+			console.log('----', settings); 
+			if (settings.cookie_domain && settings.cookie_domain.length) {
+				cookie_domain = '; domain=' + settings.cookie_domain;
+			}
+
+			document.cookie = name+"=" + value + expires + cookie_domain + "; path=/";
 		},
 		read: function(name) {
 			var nameEQ = name + "=";
